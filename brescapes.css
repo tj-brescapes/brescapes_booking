@@ -833,3 +833,87 @@ button[data-testid="see-all-properties-button"],
 @media (max-width: 768px){
   .bre-theme .hero-container{ min-height: 42vh !important; }
 }
+
+/* ======================= HEADER: make it full-width again ======================= */
+.bre-theme .bre-topnav{
+  width: 100% !important;
+}
+.bre-theme .bre-topnav .wrap{
+  /* remove any inherited max-width constraints */
+  max-width: none !important;
+  width: 100% !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+/* ======================= HERO: harden against runtime overrides ======================= */
+/* Set/override your hero image URL here */
+:root{
+  --bre-hero-url: url("https://orbirental-images.s3.amazonaws.com/5436ae8e-f34c-43ee-b18c-d263c9306945");
+}
+
+/* Target the hero by its stable class and also by containing the headline test id */
+.bre-theme .hero-container,
+.bre-theme .hero-container:has(> [data-testid="agency-headline"]),
+.bre-theme [data-testid="agency-headline"]{ /* ensures we hit it even if classes change */
+}
+
+/* Core hero box */
+.bre-theme .hero-container{
+  position: relative !important;
+  isolation: isolate !important;           /* own stacking context */
+  background: transparent !important;      /* neutralize app background */
+  min-height: 56vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  padding: 5rem 1rem 4rem !important;      /* prevent margin-collapse; guarantees height */
+}
+
+/* Image layer — using ::after so background rules can't clobber it */
+.bre-theme .hero-container::after{
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: var(--bre-hero-url) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  z-index: -1 !important;                  /* sits behind everything inside hero */
+  opacity: 1 !important;
+}
+
+/* Optional dark overlay for legibility */
+.bre-theme .hero-container::before{
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.25)) !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Headings on top */
+.bre-theme .hero-container h1,
+.bre-theme .hero-container h2{
+  position: relative !important;
+  z-index: 1 !important;
+  color: #fff !important;
+  margin: .2em 0 !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,.35) !important;
+}
+
+/* Guard rails against framework resets that toggle display */
+.bre-theme .hero-container,
+.bre-theme .hero-container::before,
+.bre-theme .hero-container::after{
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Mobile tweak */
+@media (max-width: 768px){
+  .bre-theme .hero-container{ min-height: 44vh !important; padding: 4rem 1rem 3rem !important; }
+}
