@@ -1,179 +1,205 @@
-/* ===============================
-   Blue Ridge Escapes Custom CSS
-   Fonts: Montserrat (primary), Poppins (secondary)
-   =============================== */
+/* =============================
+   Blue Ridge Escapes - Global CSS
+   ============================= */
 
-/* Load brand fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap');
+/* Import Brand Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Poppins:wght@300;400;500&display=swap');
 
-/* Global font reset */
-html, body, h1, h2, h3, h4, h5, h6, p, a, span, div, button, input, select, textarea {
-  font-family: 'Montserrat', sans-serif !important;
-  color: #1a1a1a;
-  line-height: 1.5;
-}
-
-/* Subtext / supporting copy uses Poppins */
-p, small, .bre-subtext, .property-description, .footer, .footer-text {
+/* Base Reset & Typography */
+body, h1, h2, h3, h4, h5, h6, p, a, button, input, select, textarea {
   font-family: 'Poppins', sans-serif !important;
-  font-weight: 400;
-  color: #333;
+  color: #2b2b2b;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
 }
 
-/* ===============================
-   Header & Navigation
-   =============================== */
-.bre-topnav {
-  background: #ffffff;
-  border-bottom: 1px solid #e9f0fb;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.bre-topnav a {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  font-size: 15px;
-  color: #004080;
-  text-decoration: none;
-  padding: 12px 16px;
-  transition: color 0.3s ease;
-}
-
-.bre-topnav a:hover {
-  color: #0a65c0;
-}
-
-/* Dropdown */
-details.bre-dropdown summary {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  cursor: pointer;
-}
-details.bre-dropdown[open] summary::after {
-  content: " ▲";
-}
-details.bre-dropdown summary::after {
-  content: " ▼";
-}
-
-/* ===============================
-   Hero Section
-   =============================== */
-.hero {
-  position: relative;
-  text-align: center;
-  color: #fff;
-}
-
-.hero h1 {
-  font-family: 'Montserrat', sans-serif;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif !important;
   font-weight: 700;
-  font-size: 42px;
-  color: #fff;
+  color: #1a1a1a;
+  line-height: 1.3;
 }
 
-.hero p {
-  font-family: 'Poppins', sans-serif;
+a {
+  text-decoration: none;
+  color: #00509e;
+  transition: color 0.2s ease-in-out;
+}
+a:hover {
+  color: #003f7d;
+}
+
+/* =============================
+   Hero Section
+   ============================= */
+.hero, .hf-hero, .hf-homepage-hero {
+  position: relative;
+  min-height: 480px; /* Slightly taller to fit subheading */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero h1, .hf-hero h1 {
+  font-size: 3rem;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  margin-bottom: 12px;
+}
+
+.hero p, .hf-hero p {
+  font-size: 1.2rem;
   font-weight: 400;
-  font-size: 18px;
-  margin-top: 8px;
-  color: #f4f4f4;
+  color: #f0f4f8;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
 }
 
-/* ===============================
+/* Ensure search bar doesn’t cut text */
+.hf-search-form {
+  margin-top: 20px;
+  z-index: 2;
+}
+
+/* =============================
    Buttons
-   =============================== */
-button, .btn, .bre-button {
+   ============================= */
+button, .hf-btn, .hf-primary-btn, .hf-secondary-btn, .hf-search-form button {
   font-family: 'Montserrat', sans-serif !important;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background-color: #0a65c0;
-  color: #fff !important;
-  border-radius: 8px;
+  border-radius: 40px;
+  padding: 12px 28px;
   border: none;
-  padding: 12px 20px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  background: linear-gradient(135deg, #00509e, #0073e6);
+  color: #fff !important;
+  transition: all 0.3s ease;
 }
 
-button:hover, .btn:hover, .bre-button:hover {
-  background-color: #084f96;
-  transform: translateY(-2px);
+button:hover, .hf-btn:hover, .hf-primary-btn:hover, .hf-secondary-btn:hover, .hf-search-form button:hover {
+  background: linear-gradient(135deg, #003f7d, #00509e);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
-/* ===============================
+/* =============================
    Property Cards
-   =============================== */
-.property-card, .listing-card, .hf-property-tile {
-  font-family: 'Poppins', sans-serif;
-  background: #fff;
-  border: 1px solid #e9f0fb;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+   ============================= */
+.hf-property-card {
+  border-radius: 16px !important;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  background: #ffffff;
 }
 
-.property-card:hover, .listing-card:hover, .hf-property-tile:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+.hf-property-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
 }
 
-.property-card h2, .listing-card-title, .hf-property-tile .title {
+/* Card Images */
+.hf-property-card img {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  object-fit: cover;
+  height: 240px;
+  width: 100%;
+}
+
+/* Card Body */
+.hf-property-card .hf-card-body {
+  padding: 16px 20px;
+}
+
+/* Property Title */
+.hf-property-card h3 {
   font-family: 'Montserrat', sans-serif !important;
+  font-size: 1.2rem;
   font-weight: 600;
-  font-size: 20px;
-  margin: 12px 16px 4px;
+  margin-bottom: 6px;
   color: #1a1a1a;
 }
 
-.property-card .location, .hf-property-tile .subtitle {
-  font-family: 'Poppins', sans-serif;
-  font-size: 15px;
+/* Location / Meta */
+.hf-property-card .hf-location {
+  font-size: 0.95rem;
   color: #555;
-  margin: 0 16px 12px;
+  margin-bottom: 12px;
 }
 
-.property-card .price, .hf-property-tile .price {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  color: #0a65c0;
-  margin: 0 16px 16px;
+/* Price Bar */
+.hf-property-card .hf-card-footer {
+  background: #f8faff;
+  border-top: 1px solid #e3e9f4;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* ===============================
-   Footer
-   =============================== */
-.brescapes-footer {
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  color: #333;
-  background-color: #ffffff;
-  padding: 40px 20px 30px;
-  text-align: center;
-  line-height: 1.6;
-}
-
-.brescapes-footer .biz-name {
-  font-family: 'Montserrat', sans-serif;
+/* Price Text */
+.hf-property-card .hf-price {
+  font-family: 'Montserrat', sans-serif !important;
   font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-  font-size: 13px;
+  font-size: 1rem;
+  color: #00509e;
 }
 
-.brescapes-footer .copyright {
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
+/* Book Now Button */
+.hf-property-card .hf-btn {
+  background: #00509e;
+  color: #fff !important;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+.hf-property-card .hf-btn:hover {
+  background: #003f7d;
+}
+
+/* =============================
+   Welcome Section (Intro)
+   ============================= */
+.welcome-section, .hf-intro {
+  max-width: 960px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.welcome-section h2 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.welcome-section p {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* =============================
+   Footer
+   ============================= */
+footer {
+  background: #f9f9f9;
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+}
+
+footer img {
+  max-height: 60px;
+  margin-bottom: 16px;
+}
+
+footer p {
+  font-size: 0.9rem;
   color: #555;
-}
-
-/* ===============================
-   Responsive Fixes
-   =============================== */
-@media (max-width: 768px) {
-  .hero h1 { font-size: 32px; }
-  .hero p { font-size: 16px; }
-  .property-card { margin-bottom: 20px; }
 }
