@@ -393,6 +393,77 @@ input:focus, select:focus, textarea:focus {
   align-items: center;
   text-align: center;
 }
+/***********************
+  BRE — FORCE SMALLER HERO ON HOMEPAGE (Hostfully DBS)
+  Works whether hero is a bg image div or <picture>/<img>.
+***********************/
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child {
+  /* kill any ratio/min-height tricks Hostfully injects */
+  min-height: 0 !important;
+  max-height: 420px !important;
+  height: clamp(220px, 38vh, 420px) !important;
+
+  /* neutralize padding-bottom “aspect ratio” hacks */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+
+  /* make it look like a BRE hero card */
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 10px 30px rgba(11,42,97,.14) !important;
+
+  /* if the hero uses background-image on the wrapper */
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+/* If Hostfully uses pseudo-elements to set height, collapse them */
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child::before,
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child::after {
+  content: none !important;
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+}
+
+/* Make inner <img>/<picture> fill the clamped height */
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child img,
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child picture,
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child picture img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: 16px !important;
+}
+
+/* Some builds wrap the image one level deeper—cover that too */
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child > * {
+  height: 100% !important;
+}
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child > * img {
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Tighten spacing around the hero */
+html.bre-theme body.hf-dbs main.hf-dbs-content { padding-top: 12px !important; }
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child { margin-top: 0 !important; }
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:nth-child(2) { margin-top: 16px !important; }
+
+/* Optional: pull the search panel up over the hero a bit */
+html.bre-theme body.hf-dbs .hf-search,
+html.bre-theme body.hf-dbs .search {
+  margin-top: -28px !important;
+  position: relative !important;
+  z-index: 2 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 36px rgba(11,42,97,.16) !important;
+  background: #fff !important;
+  padding: 10px !important;
+}
+
 
 
 
