@@ -779,8 +779,57 @@ button[data-testid="see-all-properties-button"],
 .bre-theme .carousel-item{
   visibility: visible !important;
 }
+/* ===== HERO: force background via pseudo element so runtime styles can't wipe it ===== */
+:root{
+  --bre-hero-url: url("https://orbirental-images.s3.amazonaws.com/5436ae8e-f34c-43ee-b18c-d263c9306945");
+}
 
+.bre-theme .hero-container,
+.bre-theme .sc-dmXWDj.hero-container,
+.bre-theme .sc-dmXWDj.laQaRB.hero-container{
+  position: relative !important;
+  /* neutralize any background the app injects later */
+  background: none !important;
+  min-height: 52vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  overflow: hidden !important;
+}
 
+/* Image layer (cannot be removed by their background rules) */
+.bre-theme .hero-container::after{
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: var(--bre-hero-url) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  z-index: 0 !important;
+  opacity: 1 !important;
+}
 
+/* Dark overlay above the image, below text */
+.bre-theme .hero-container::before{
+  content: "" !important;
+  position: absolute !important; inset: 0 !important;
+  background: linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.35)) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
 
+/* Text stays above both layers */
+.bre-theme .hero-container h1,
+.bre-theme .hero-container h2{
+  position: relative !important;
+  z-index: 2 !important;
+  margin: .15em 0 !important;
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,.35) !important;
+}
 
+@media (max-width: 768px){
+  .bre-theme .hero-container{ min-height: 42vh !important; }
+}
