@@ -319,6 +319,82 @@ input:focus, select:focus, textarea:focus {
 
 /* 8) MISC — smoother page rhythm */
 .container, .content, .main, .page-content { max-width: 1200px; margin-inline: auto; padding-inline: 20px; }
+/***********************
+  BRE — HERO SIZE & HOMEPAGE LAYOUT (Hostfully DBS)
+  Targets: first child of main.hf-dbs-content (the hero wrapper)
+***********************/
+
+/* 1) Clamp the hero height (works whether it's a bg-image div or an <img>/<picture>) */
+.hf-dbs main.hf-dbs-content > *:first-child {
+  /* shorter, more premium hero */
+  height: clamp(220px, 38vh, 420px) !important;
+  min-height: 0 !important;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(11,42,97,.14);
+  background-size: cover !important;
+  background-position: center center !important;
+  margin-inline: auto;
+}
+
+/* If the hero uses an img/picture inside, make it cover the new height */
+.hf-dbs main.hf-dbs-content > *:first-child img,
+.hf-dbs main.hf-dbs-content > *:first-child picture,
+.hf-dbs main.hf-dbs-content > *:first-child picture img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: 16px !important;
+}
+
+/* 2) Reduce any default vertical padding/margins Hostfully adds before/after the hero */
+.hf-dbs main.hf-dbs-content { padding-top: 12px !important; }
+.hf-dbs main.hf-dbs-content > *:first-child { margin-top: 0 !important; }
+.hf-dbs main.hf-dbs-content > *:nth-child(2) { margin-top: 16px !important; }
+
+/* 3) Pull the search panel up for a tighter “hero + search” look (optional) */
+.hf-dbs .hf-search, 
+.hf-dbs .search {
+  margin-top: -32px !important;    /* overlap the hero slightly */
+  position: relative;
+  z-index: 2;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 36px rgba(11,42,97,.16) !important;
+  background: #fff !important;
+  padding: 10px !important;
+}
+
+/* 4) Make the site feel more custom (cards/buttons already styled earlier) */
+.hf-dbs .hf-card, 
+.hf-dbs .property-card, 
+.hf-dbs .listing, 
+.hf-dbs .card {
+  border: 1px solid #e6eefc;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 6px 24px rgba(11, 42, 97, 0.08);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.hf-dbs .hf-card:hover, 
+.hf-dbs .property-card:hover, 
+.hf-dbs .listing:hover, 
+.hf-dbs .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(11, 42, 97, 0.14);
+}
+
+/* 5) Safety: ensure footer logo block stays centered */
+.bre-footer .col--logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
 
 
 
