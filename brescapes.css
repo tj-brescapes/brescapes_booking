@@ -185,4 +185,257 @@ a:hover{ color:var(--bre-blue-600) }
   outline: 2px solid #01BDF9;
   outline-offset: 2px;
 }
+/************************************************************
+  BLUE RIDGE ESCAPES — DISTINCT BUTTONS & PROPERTY CARDS
+  Drop this at the bottom of your existing brescapes.css
+*************************************************************/
+
+/* -------------------------------
+   Brand tokens (fallbacks only)
+--------------------------------*/
+:root{
+  --bre-blue-700:#1D46B7;
+  --bre-blue-600:#016FE7;
+  --bre-blue-400:#01BDF9;
+  --bre-ink:#0E1A2B;
+  --bre-white:#fff;
+
+  --bre-grad: linear-gradient(135deg, var(--bre-blue-700) 0%, var(--bre-blue-600) 55%, var(--bre-blue-400) 100%);
+  --bre-card-shadow: 0 8px 26px rgba(11,42,97,.10);
+  --bre-card-shadow-hover: 0 16px 42px rgba(11,42,97,.16);
+  --bre-radius-lg: 16px;
+  --bre-radius-md: 12px;
+  --bre-radius-pill: 999px;
+}
+
+/* =========================================================
+   BUTTONS — primary / secondary / outline / subtle
+   Targets common Hostfully button classes + raw <button>
+   (No sizing changes to containers)
+========================================================= */
+button,
+.btn,
+.button,
+.hf-button,
+.hf-primary-btn,
+input[type="submit"] {
+  background: var(--bre-grad) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--bre-radius-md) !important;
+  padding: 11px 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: .2px;
+  box-shadow: 0 4px 14px rgba(1,111,231,.22) !important;
+  transition: transform .06s ease, filter .12s ease, box-shadow .12s ease !important;
+}
+button:hover,
+.btn:hover,
+.button:hover,
+.hf-button:hover,
+.hf-primary-btn:hover,
+input[type="submit"]:hover{
+  filter: brightness(1.05) saturate(1.05) !important;
+  box-shadow: 0 6px 20px rgba(1,111,231,.28) !important;
+}
+button:active,
+.btn:active,
+.button:active,
+.hf-button:active,
+.hf-primary-btn:active,
+input[type="submit"]:active{
+  transform: translateY(1px) !important;
+}
+button:disabled,
+.btn:disabled,
+.button:disabled,
+.hf-button:disabled,
+.hf-primary-btn:disabled,
+input[type="submit"]:disabled{
+  opacity:.55 !important;
+  filter: grayscale(.1) !important;
+  cursor: not-allowed !important;
+}
+
+/* Secondary (use when Hostfully renders .secondary / .hf-secondary-btn) */
+.hf-secondary-btn,
+.btn.secondary,
+.button.secondary{
+  background: #f4f8ff !important;
+  color: var(--bre-blue-700) !important;
+  border: 1px solid #d9e7ff !important;
+  box-shadow: none !important;
+}
+.hf-secondary-btn:hover,
+.btn.secondary:hover,
+.button.secondary:hover{
+  background: #ecf3ff !important;
+}
+
+/* Ghost / outline buttons some themes emit */
+.button.outline,
+.btn.outline,
+.hf-button.outline{
+  background: transparent !important;
+  color: var(--bre-blue-600) !important;
+  border: 2px solid #dbe6ff !important;
+  box-shadow: none !important;
+}
+
+/* “Pill” variation for filters/tags Hostfully renders as buttons */
+.badge, .pill, .filter-pill, .hf-filter .btn {
+  background: #eef5ff !important;
+  color: #0f2a4a !important;
+  border: 1px solid #d9e7ff !important;
+  border-radius: var(--bre-radius-pill) !important;
+  font-weight: 600 !important;
+  padding: 6px 12px !important;
+}
+
+/* Pagination buttons */
+.pagination button, .pagination a,
+.hf-pagination button, .hf-pagination a{
+  background: #fff !important;
+  border: 1px solid #dbe6ff !important;
+  color: #0e2f66 !important;
+  border-radius: var(--bre-radius-md) !important;
+  padding: 8px 12px !important;
+}
+.pagination .active, .hf-pagination .active{
+  background: var(--bre-grad) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+/* Focus states (a11y) */
+button:focus-visible,
+.btn:focus-visible,
+.hf-button:focus-visible{
+  outline: 3px solid rgba(1,189,249,.35) !important;
+  outline-offset: 2px !important;
+}
+
+/* =========================================================
+   PROPERTY CARDS — distinct, premium feel
+   Targets common listing/card shells + inner parts
+========================================================= */
+.hf-card,
+.property-card,
+.listing,
+.card {
+  background: #fff !important;
+  border: 1px solid #e8effc !important;
+  border-radius: var(--bre-radius-lg) !important;
+  box-shadow: var(--bre-card-shadow) !important;
+  overflow: hidden !important;
+  transition: transform .16s ease, box-shadow .16s ease !important;
+}
+.hf-card:hover,
+.property-card:hover,
+.listing:hover,
+.card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--bre-card-shadow-hover) !important;
+}
+
+/* image area stays native height, but we polish edges */
+.hf-card img,
+.property-card img,
+.listing img,
+.card img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;           /* keep original sizing */
+  object-fit: cover !important;
+  border-bottom: 1px solid #eef3ff !important;
+}
+
+/* title, location, price */
+.hf-card h3,
+.property-card h3,
+.listing h3,
+.card h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  letter-spacing: .2px;
+  color: var(--bre-ink) !important;
+  margin: 12px 14px 6px !important;
+}
+.hf-card .location, .listing .location, .card .location {
+  color: #4a5f7a !important;
+  margin: 0 14px 6px !important;
+  font-weight: 500 !important;
+}
+.hf-card .price, .listing .price, .card .price {
+  color: #0e2f66 !important;
+  font-weight: 800 !important;
+  margin: 0 14px 14px !important;
+}
+
+/* Card meta rows / amenities lines */
+.hf-card .meta, .listing .meta, .card .meta {
+  display: flex; flex-wrap: wrap; gap: 8px 12px;
+  padding: 0 14px 12px;
+  color: #395273;
+  font-weight: 600;
+}
+.hf-card .meta .item, .listing .meta .item { display: inline-flex; gap:6px; align-items:center }
+
+/* a subtle “BRE tag” badge (if Hostfully emits labels like New, Promo, etc.) */
+.hf-card .badge, .listing .badge, .card .badge {
+  background: #eaf5ff !important;
+  color: #0e2f66 !important;
+  border: 1px solid #d3e7ff !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  padding: 4px 8px !important;
+}
+
+/* Favorite/heart buttons some skins show on cards */
+.hf-card [class*="favorite"],
+.listing [class*="favorite"],
+.card [class*="favorite"]{
+  background: rgba(255,255,255,.9) !important;
+  border: 1px solid #e6eefc !important;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 20px rgba(11,42,97,.12) !important;
+  backdrop-filter: blur(4px);
+}
+
+/* Keep any skeleton loaders tidy while results load */
+[class*="skeleton"], [data-testid*="skeleton"]{
+  border-radius: var(--bre-radius-lg) !important;
+  background: linear-gradient(90deg, #f4f8ff 25%, #eef5ff 37%, #f4f8ff 63%) !important;
+  background-size: 400% 100% !important;
+  animation: bre-shimmer 1.4s ease infinite;
+}
+@keyframes bre-shimmer{ 0%{background-position:100% 0} 100%{background-position:0 0} }
+
+/* =========================================================
+   FILTERS / SORT ROW ABOVE LISTINGS (pills look)
+========================================================= */
+.hf-filter, [class*="filters"], [data-testid*="filter"]{
+  background:#fff !important;
+  border:1px solid #e8effc !important;
+  border-radius: var(--bre-radius-lg) !important;
+  box-shadow: 0 6px 22px rgba(11,42,97,.08) !important;
+  padding: 10px !important;
+}
+.hf-filter .btn, [class*="filters"] .btn {
+  border-radius: var(--bre-radius-pill) !important;
+  background:#eef5ff !important;
+  color:#0f2a4a !important;
+  border:1px solid #d9e7ff !important;
+  font-weight:700 !important;
+}
+
+/* =========================================================
+   ACCESSIBILITY / FOCUS WITHIN CARDS
+========================================================= */
+.hf-card:focus-within, .property-card:focus-within, .listing:focus-within, .card:focus-within{
+  outline: 3px solid rgba(1,189,249,.30);
+  outline-offset: 2px;
+}
+
 
