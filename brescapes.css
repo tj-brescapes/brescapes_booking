@@ -1,281 +1,188 @@
-/************************************************************
-  Blue Ridge Escapes – Hostfully Agency CSS
-  Goal: full-bleed header/top banner + visible hero background
-  Safe, minimal overrides with careful scoping.
-*************************************************************/
+/* ===============================
+   Blue Ridge Escapes Custom CSS
+   =============================== */
 
-/* -------- Base / Safety -------------------------------------------------- */
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Helvetica+Now:wght@400;500;700&display=swap');
 
-/* Ensure the page can extend full width */
-html, body {
-  width: 100%;
+/* Global Reset + Fonts */
+body, h1, h2, h3, h4, h5, h6, p, a, button, input, select, textarea {
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-  /* Prevent accidental layout clipping from previous rules */
-  max-width: none !important;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: #000000;
 }
 
-/* DO NOT constrain the overall app shell */
-body > header,
-body > footer,
-body > main,
-body > .app,
-body > .main {
-  max-width: none !important;
+h1, h2, h3 {
+  font-family: 'Helvetica Now', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-/* -------- Header / Top Banner (full-bleed) ------------------------------- */
-
-/* Hostfully uses various containers; cover common cases safely */
-header,
-.header,
-.agency-header,
-.top-banner,
-.hf-header,
-.hf-navbar,
-.header-container {
-  width: 100% !important;
-  max-width: none !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding-left: 0;
-  padding-right: 0;
-  box-sizing: border-box;
-}
-
-/* If your theme used a generic `.container { max-width: ... }`,
-   make sure it doesn't shrink the header/nav areas */
-header .container,
-.agency-header .container,
-.hf-navbar .container {
-  max-width: none !important;
-  width: 100% !important;
-  margin: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* Keep navigation above the hero if they overlap */
-.hf-navbar,
-.agency-header,
-header {
-  position: relative;
-  z-index: 5;
-}
-
-/* -------- Hero Section --------------------------------------------------- */
-
-/* Hostfully agency hero commonly renders a .hero-container with a CSS background.
-   Give it a real height and make the image visible. */
-.hero-container {
-  position: relative;
-  width: 100%;
-  min-height: clamp(360px, 48vh, 720px);
+/* ===============================
+   Header
+   =============================== */
+.bre-topnav {
+  background-color: #ffffff;
+  border-bottom: 2px solid #eaeaea;
   display: flex;
-  align-items: center;
   justify-content: center;
-  text-align: center;
-
-  /* Make sure the background image shows */
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-
-  /* In case previous CSS set backgrounds to none */
-  background-color: transparent !important;
-
-  overflow: hidden;
-}
-
-/* Soft dark scrim so text stays legible without hiding the image */
-.hero-container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Headings inside the hero (Hostfully adds data-testid attrs on these) */
-.hero-container h1,
-.hero-container h2,
-.hero-container [data-testid="agency-headline"],
-.hero-container [data-testid="agency-sub-headline"] {
+  align-items: center;
+  padding: 10px 30px;
+  width: 100%;
   position: relative;
-  z-index: 1;
-  margin: 0.25em 0;
-  color: #ffffff;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  z-index: 1000;
 }
 
-/* Comfortable hero typography defaults */
-.hero-container h1,
-.hero-container [data-testid="agency-headline"] {
-  font-size: clamp(28px, 4.5vw, 56px);
-  line-height: 1.05;
-  letter-spacing: 0.02em;
+.bre-topnav .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.bre-topnav a {
+  font-family: 'Helvetica Now', sans-serif;
+  font-weight: 500;
+  color: #1d46b7;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 15px;
+}
+
+.bre-topnav a:hover {
+  color: #01BDF9;
+}
+
+/* ===============================
+   Hero Section
+   =============================== */
+.hero-container {
+  background: url("https://orbirental-images.s3.amazonaws.com/5436ae8e-f34c-43ee-b18c-d263c9306945") center center / cover no-repeat;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 20px;
+  position: relative;
+}
+
+.hero-container h1 {
+  color: #ffffff;
+  font-size: 42px;
+  font-family: 'Helvetica Now', sans-serif;
   font-weight: 700;
 }
-.hero-container h2,
-.hero-container [data-testid="agency-sub-headline"] {
-  font-size: clamp(16px, 2.2vw, 24px);
-  line-height: 1.25;
-  font-weight: 500;
-  opacity: 0.95;
+
+.hero-container h2 {
+  color: #eaf4ff;
+  font-size: 22px;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 10px;
 }
 
-/* Guard against an absolutely-positioned child covering the hero */
-.hero-container > .overlay,
-.hero-container > .scrim {
-  pointer-events: none;
+/* ===============================
+   Property Cards
+   =============================== */
+.property-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* If a previous stylesheet nulled backgrounds globally, re-inherit on hero text */
-.hero-container * {
-  background-color: transparent !important;
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* -------- Main Content Width (optional, non-hero) ------------------------ */
-
-/* If you want normal page content constrained but NOT header/hero,
-   target likely content wrappers instead of global shells. Adjust as needed. */
-main .container,
-.main .container,
-.content-inner,
-.page-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  box-sizing: border-box;
-}
-
-/* -------- Property Cards (safe visual polish) ---------------------------- */
-
-/* Ensure listing images render correctly without forcing changes */
-.property-card img,
-.listing-card img,
-.sc-property-card img {
+.property-card img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 220px;
   object-fit: cover;
 }
 
-/* Keep card grids breathing on small screens */
-.property-card,
-.listing-card,
-.sc-property-card {
-  box-sizing: border-box;
+.property-card .details {
+  padding: 15px;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
 }
 
-/* -------- Defensive Fixes for Common Breakages --------------------------- */
-
-/* Neutralize over-aggressive max-width rules that might have been set globally */
-header, nav, main, footer, .wrapper, .content, .container {
-  /* Only remove max-width; don’t change their inner layout */
-  max-width: none !important;
+.property-card .details h3 {
+  font-family: 'Helvetica Now', sans-serif;
+  font-size: 18px;
+  color: #1d46b7;
 }
 
-/* Make sure links/buttons in the hero remain clickable and visible */
-.hero-container a,
-.hero-container button {
-  position: relative;
-  z-index: 2;
+.property-card .details p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
 }
 
-/* -------- Responsive Tweaks ---------------------------------------------- */
-
-@media (max-width: 768px) {
-  .hero-container {
-    min-height: 48vh;
-    padding: 2rem 1rem;
-  }
+/* Property stats */
+.property-card .stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: #000;
+  margin-top: 10px;
 }
 
-/* -------- Optional: gentle brand touches (edit as desired) --------------- */
-
-/* Example link + focus styles (kept subtle) */
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid rgba(0, 102, 204, 0.6);
-  outline-offset: 2px;
-  border-radius: 6px;
-}
-/* ========== HEADER: full-width like before ========== */
-.hf-dbs-header .bre-topnav {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  background: #fff;
+/* Buttons */
+button, .btn, .cta-button {
+  background-color: #016FE7;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: 'Helvetica Now', sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.hf-dbs-header .bre-topnav .wrap {
-  max-width: 1400px;      /* adjust if you prefer wider */
-  margin: 0 auto;
-  padding: 12px 24px;
+button:hover, .btn:hover, .cta-button:hover {
+  background-color: #01BDF9;
 }
 
-/* ========== HERO: stable selector, locked background ========== */
-.hf-dbs .hero-container {
-  /* your hero image */
-  --hero-url: url("https://orbirental-images.s3.amazonaws.com/5436ae8e-f34c-43ee-b18c-d263c9306945");
-
-  position: relative;
-  display: grid;
-  place-items: center;
+/* ===============================
+   Footer
+   =============================== */
+.brescapes-footer {
+  background-color: #1d46b7;
+  color: #ffffff;
+  padding: 50px 20px;
   text-align: center;
-
-  /* size & layout */
-  min-height: 60vh;
-  padding: 6rem 1rem;
-
-  /* force the background so JS re-renders can't remove it */
-  background-image: var(--hero-url) !important;
-  background-position: center center !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-color: transparent !important;
-
-  border-radius: 20px;
-  overflow: hidden;
 }
 
-/* readable text over image */
-.hf-dbs .hero-container h1,
-.hf-dbs .hero-container h2 {
-  position: relative;
-  z-index: 1;
-  color: #fff;
-  text-shadow: 0 2px 18px rgba(0,0,0,.45);
-  margin: .25rem 0;
+.brescapes-footer a {
+  color: #01BDF9;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* subtle overlay to keep text crisp */
-.hf-dbs .hero-container::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.35));
-  z-index: 0;
-  pointer-events: none;
+.brescapes-footer a:hover {
+  text-decoration: underline;
 }
 
-/* spacing from search/filter area below if needed */
-.hf-dbs .hero-container + .search-filter-container {
-  margin-top: 1.25rem;
+.brescapes-footer .biz-name {
+  font-family: 'Helvetica Now', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 15px 0 5px;
+  font-size: 14px;
 }
 
-/* bigger on desktop */
-@media (min-width: 992px) {
-  .hf-dbs .hero-container {
-    min-height: 68vh;
-    padding: 8rem 2rem;
-  }
+.brescapes-footer .copyright {
+  font-size: 13px;
+  margin-top: 10px;
 }
-
