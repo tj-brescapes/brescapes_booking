@@ -600,5 +600,21 @@ button[data-testid="see-all-properties-button"],
   .bre-nav { gap: 14px; }
   .bre-brand .tag { display: none; }
 }
+/* FORCE HERO IMAGE + VISIBILITY */
+.hf-dbs .hero-container {
+  position: relative;
+  min-height: 52vh;
+  background: url('https://tj-brescapes.github.io/brescapes_booking/hero.jpg') center/cover no-repeat !important;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; color: #fff;
+}
+.hf-dbs .hero-container::after {
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.15));
+}
+.hf-dbs .hero-container h1, .hf-dbs .hero-container h2 {
+  position:relative; z-index:1; text-shadow:0 2px 10px rgba(0,0,0,.3);
+}
+
 
 
