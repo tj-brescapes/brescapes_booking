@@ -1,5 +1,5 @@
 /* =========================================================
-   Blue Ridge Escapes — Site CSS (clean build)
+   Blue Ridge Escapes — Site CSS (clean build, v1.8)
    Fonts: Montserrat (headings/CTAs), Poppins (body)
    ========================================================= */
 
@@ -115,7 +115,6 @@ html.bre-theme body.hf-dbs [class*="gallery"] > *{ overflow:visible }
    ========================================================= */
 .hf-dbs main.hf-dbs-content > *{ overflow:visible }
 .hf-dbs main.hf-dbs-content > *:first-child{
-  /* hero container: keep Hostfully's natural size */
   border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-sm);
 }
 .hf-dbs main.hf-dbs-content > *:first-child img,
@@ -181,6 +180,7 @@ button:focus-visible, .btn:focus-visible, .hf-button:focus-visible{ outline:3px 
   border-radius:var(--radius-lg) !important; overflow:hidden !important;
   box-shadow:0 8px 26px rgba(11,42,97,.10) !important;
   transition:transform .16s ease, box-shadow .16s ease !important;
+  padding-bottom:10px !important;     /* ensures last row never gets trimmed */
 }
 .hf-card:hover, .property-card:hover, .listing:hover, .card:hover{
   transform:translateY(-4px) !important; box-shadow:0 16px 42px rgba(11,42,97,.16) !important;
@@ -198,28 +198,59 @@ button:focus-visible, .btn:focus-visible, .hf-button:focus-visible{ outline:3px 
   font-size:1.05rem !important; letter-spacing:.2px; color:var(--bre-ink) !important;
   margin:12px 14px 6px !important;
 }
-.hf-card .location, .listing .location, .card .location{ color:#4a5f7a !important; margin:0 14px 6px !important; font:500 14px/1.3 Poppins,ui-sans-serif !important }
-.hf-card .price, .listing .price, .card .price{ color:#0e2f66 !important; font:800 15px/1 Montserrat,ui-sans-serif !important; margin:0 14px 14px !important }
-
-/* Badges */
-.hf-card .badge, .listing .badge, .card .badge{
-  background:#eaf5ff !important; color:#0e2f66 !important; border:1px solid #d3e7ff !important;
-  border-radius:8px !important; font:700 12px/1 Poppins,ui-sans-serif !important; padding:4px 8px !important;
+.hf-card .location, .listing .location, .card .location{
+  color:#4a5f7a !important; margin:0 14px 10px !important; font:500 14px/1.3 Poppins,ui-sans-serif !important
+}
+.hf-card .price, .listing .price, .card .price{
+  color:#0e2f66 !important; font:800 15px/1 Montserrat,ui-sans-serif !important; margin:0 14px 12px !important
 }
 
-/* “Favorite” buttons some skins show */
-.hf-card [class*="favorite"], .listing [class*="favorite"], .card [class*="favorite"]{
-  background:rgba(255,255,255,.9) !important; border:1px solid #e6eefc !important; border-radius:10px !important;
-  box-shadow:0 6px 20px rgba(11,42,97,.12) !important; backdrop-filter:blur(4px);
+/* Stats/amenities (FIX: wrap so nothing is clipped) */
+.hf-card .meta,
+.property-card .meta,
+.listing .meta,
+.card .meta,
+.hf-card [class*="amenit"],
+.property-card [class*="amenit"],
+.listing [class*="amenit"],
+.card [class*="amenit"]{
+  display:flex !important;
+  flex-wrap:wrap !important;              /* key: allows wrapping */
+  gap:8px 10px !important;
+  margin:0 14px 12px !important;          /* breathing room at bottom edge */
+  overflow:visible !important;
 }
 
-/* Results/feature containers should always render (no accidental collapse) */
-.hf-dbs [class*="featured"], .hf-dbs [data-testid*="featured"],
-.hf-dbs [class*="properties"], .hf-dbs [data-testid*="properties"],
-.hf-dbs [class*="results"], .hf-dbs [data-testid*="results"],
-.hf-dbs [class*="listings"], .hf-dbs [data-testid*="list"]{
-  position:relative; z-index:1; height:auto !important; min-height:240px !important; visibility:visible !important; opacity:1 !important;
-  margin-top:22px !important;
+/* =========================================================
+   “See all properties” tile — reduce footprint
+   ========================================================= */
+/* Hostfully uses a few different labels; target common patterns */
+.hf-dbs [data-testid*="view-all"],
+.hf-dbs [class*="view-all"],
+.hf-dbs [class*="viewAll"],
+.hf-dbs a[aria-label*="See all"],
+.hf-dbs a[href*="/search"][class*="card"],
+.hf-dbs a[href*="/search"][class*="tile"]{
+  width: 220px !important;
+  height: 260px !important;
+  min-width: 200px !important;
+  min-height: 220px !important;
+  padding: 16px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  box-shadow: var(--shadow-sm) !important;
+  flex: 0 0 auto !important;              /* prevent grid stretching it */
+}
+.hf-dbs [data-testid*="view-all"] *,
+.hf-dbs [class*="view-all"] *,
+.hf-dbs [class*="viewAll"] *{
+  font-family:'Montserrat',ui-sans-serif !important;
+  font-weight:700 !important;
+  font-size:16px !important;
+  line-height:1.2 !important;
 }
 
 /* =========================================================
@@ -247,66 +278,3 @@ button:focus-visible, .btn:focus-visible, .hf-button:focus-visible{ outline:3px 
   .bre-brand img{ height:32px }
   .bre-nav{ gap:10px }
 }
-/***** BRE — fix clipped stats on cards + shrink “See all properties” tile *****/
-
-/* 1) Property-card stats: allow wrapping + add safe bottom space */
-.hf-card .meta,
-.property-card .meta,
-.listing .meta,
-.card .meta,
-.hf-card [class*="amenit"],
-.property-card [class*="amenit"],
-.listing [class*="amenit"],
-.card [class*="amenit"]{
-  display: flex !important;
-  flex-wrap: wrap !important;           /* <- prevents clipping */
-  gap: 8px 10px !important;
-  margin: 0 14px 12px !important;       /* breathing room at the bottom */
-  overflow: visible !important;
-}
-
-/* Ensure the overall card has a touch of inner bottom padding so
-   rounded corners don't trim the last row of pills */
-.hf-card,
-.property-card,
-.listing,
-.card{
-  padding-bottom: 10px !important;
-}
-
-/* 2) “See all properties” tile: reduce footprint, center text */
-.hf-dbs [data-testid*="view-all"],
-.hf-dbs [class*="view-all"],
-.hf-dbs [class*="see-all"],
-.hf-dbs a[aria-label*="See all"],
-.hf-dbs a[href*="search"]:has(span:contains("See all")) {
-  width: 220px !important;
-  height: 260px !important;
-  min-width: 200px !important;
-  min-height: 220px !important;
-  padding: 16px !important;
-  border-radius: 16px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  box-shadow: var(--shadow-sm) !important;
-}
-
-/* Text sizing inside the tile */
-.hf-dbs [data-testid*="view-all"] *,
-.hf-dbs [class*="view-all"] *,
-.hf-dbs [class*="see-all"] *{
-  font-family: 'Montserrat', sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 16px !important;
-  line-height: 1.2 !important;
-}
-
-/* If the grid is trying to stretch that CTA, forbid it */
-.hf-dbs [data-testid*="view-all"],
-.hf-dbs [class*="view-all"],
-.hf-dbs [class*="see-all"]{
-  flex: 0 0 auto !important;
-}
-
