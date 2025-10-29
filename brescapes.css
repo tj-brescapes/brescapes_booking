@@ -210,3 +210,76 @@ button[data-testid="app-button"]:hover{
 
 /* Remove accidental underline on all header links */
 .bre-topnav a, .bre-topnav a:visited{ text-decoration:none !important; }
+/* --- Keep search bar visible below hero --- */
+.hero-container{
+  /* existing hero styles stay */
+  margin-bottom: 28px !important;     /* add space after hero */
+  overflow: visible !important;
+}
+
+.search-filter-container{
+  position: relative !important;
+  z-index: 5 !important;              /* above hero background */
+  margin-top: 0 !important;           /* make sure no negative margin from theme */
+}
+
+/* If Hostfully injects a wrapper that overlaps, lift it too */
+.sc-bBkKde.search-filter-container,
+[data-testid="search-filter-component"]{
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+/* --- Brand gradient buttons everywhere --- */
+:root{
+  --bre-blue:#016FE7;         /* primary */
+  --bre-blue-light:#01BDF9;   /* secondary accent */
+  --bre-navy:#1D46B7;
+  --bre-btn-grad: linear-gradient(135deg, var(--bre-blue) 0%, var(--bre-blue-light) 100%);
+  --bre-btn-grad-hover: linear-gradient(135deg, var(--bre-navy) 0%, var(--bre-blue) 100%);
+}
+
+/* Hostfully primary buttons (search, CTA, etc.) */
+button[data-testid="app-button"],
+.btn.btn-primary,
+button[type="submit"],
+a.btn.btn-primary{
+  background: var(--bre-btn-grad) !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  padding: 10px 18px !important;
+  box-shadow: 0 6px 16px rgba(1,111,231,.24) !important;
+  transition: transform .06s ease, box-shadow .2s ease, background .2s ease !important;
+}
+
+button[data-testid="app-button"]:hover,
+.btn.btn-primary:hover,
+button[type="submit"]:hover,
+a.btn.btn-primary:hover{
+  background: var(--bre-btn-grad-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(1,111,231,.28) !important;
+}
+
+button[data-testid="app-button"]:active,
+.btn.btn-primary:active{
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(1,111,231,.22) !important;
+}
+
+button[data-testid="app-button"]:focus-visible,
+.btn.btn-primary:focus-visible{
+  outline: 2px solid rgba(1,189,249,.6) !important;
+  outline-offset: 2px;
+}
+
+/* Make sure disabled retains legible brand look */
+.btn.btn-primary:disabled,
+button[data-testid="app-button"]:disabled{
+  background: linear-gradient(135deg, #7fb9fb, #bfe9ff) !important;
+  opacity: .75 !important;
+  cursor: not-allowed !important;
+}
+
+
