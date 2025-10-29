@@ -1,5 +1,9 @@
 /* =========================================================
-   Blue Ridge Escapes — brescapes.css (v3.1)
+   Blue Ridge Escapes — brescapes.css (v3.2)
+   Fixes:
+   • Restore hero image (scoped height:100% for hero media)
+   • Keep uniform property cards + hover zoom
+   • No right-side whitespace; footer full width
    Branding: Montserrat (headings/CTAs), Poppins (body)
    ========================================================= */
 
@@ -20,6 +24,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Global images (safe defaults) */
 img { max-width: 100%; height: auto; display: block; }
 
 :root{
@@ -83,15 +88,33 @@ header[data-testid="white-label-header"] a{
 header[data-testid="white-label-header"] a:hover{ color:#0e2f66 !important; text-decoration:none !important; }
 
 /* =========================================================
-   HERO — no negative margins or clipping; show normally
+   HERO — show image reliably (no clipping/collapse)
    ========================================================= */
+
+/* Never collapse the hero; don’t clip it */
 .hf-dbs main.hf-dbs-content{ overflow: visible; }
 .hf-dbs main.hf-dbs-content [data-testid*="hero"],
 .hf-dbs main.hf-dbs-content .hero{
   border-radius: var(--r-lg);
-  overflow: hidden;                 /* keep search box shadow clean */
-  box-shadow: var(--shadow-sm);
+  overflow: visible;                 /* allow inner media to define height */
+  box-shadow: none;
+  min-height: 280px;                 /* safety for slower loads */
 }
+
+/* Hostfully hero renders media inside wrappers — keep them visible */
+.hf-dbs [data-testid*="hero"] *{ max-width:100%; }
+
+/* Critical fix: hero media must fill its container (don’t use our global height:auto) */
+.hf-dbs [data-testid*="hero"] picture,
+.hf-dbs [data-testid*="hero"] picture img,
+.hf-dbs [data-testid*="hero"] img{
+  width:100% !important;
+  height:100% !important;            /* this restores the hero image */
+  object-fit:cover !important;
+  display:block !important;
+}
+
+/* Search panel placement */
 .hf-dbs .hf-search, .hf-dbs .search, .hf-dbs .hf-search-form{
   margin-top: 12px;                 /* never overlap hero text */
   background:#fff; border-radius:14px; padding:10px; box-shadow: var(--shadow-md);
@@ -117,7 +140,7 @@ button:active, .btn:active, .hf-button:active, .hf-primary-btn:active{ transform
    PROPERTY CARDS — uniform media + safe badges + hover zoom
    ========================================================= */
 
-/* Shell */
+/* Card shell */
 .hf-card, .property-card, .listing, .card{
   background:#fff !important; border:1px solid #e8effc !important;
   border-radius: var(--r-lg) !important; overflow: hidden !important;
@@ -128,7 +151,7 @@ button:active, .btn:active, .hf-button:active, .hf-primary-btn:active{ transform
   transform: translateY(-4px) !important; box-shadow: var(--shadow-md) !important;
 }
 
-/* IMAGE WRAPPER — uniform height + clip for hover zoom */
+/* Media wrapper — uniform height + clip for hover zoom */
 .hf-card picture, .hf-card .media, .hf-card .image,
 .property-card picture, .property-card .media, .property-card .image,
 .listing picture, .listing .media, .listing .image,
@@ -139,7 +162,7 @@ button:active, .btn:active, .hf-button:active, .hf-primary-btn:active{ transform
   border-top-right-radius: var(--r-lg) !important;
 }
 
-/* IMAGE — hover zoom */
+/* Image — hover zoom */
 .hf-card img, .property-card img, .listing img, .card img{
   width:100% !important; height:100% !important; object-fit:cover !important;
   transform: scale(1); transition: transform .35s ease !important;
@@ -148,7 +171,7 @@ button:active, .btn:active, .hf-button:active, .hf-primary-btn:active{ transform
   transform: scale(1.06) !important;                      /* subtle zoom */
 }
 
-/* BODY spacing (ensures stats never reach rounded edge) */
+/* Body spacing (ensures stats never reach rounded edge) */
 .hf-card .content, .property-card .content, .listing .content, .card .content,
 .hf-card .hf-card-body, .property-card .hf-card-body, .listing .hf-card-body, .card .hf-card-body{
   padding: 12px 14px 16px !important;
