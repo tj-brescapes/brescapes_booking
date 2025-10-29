@@ -1,5 +1,5 @@
 /* =========================================================
-   Blue Ridge Escapes — Site CSS (clean build, v1.8)
+   Blue Ridge Escapes — Site CSS (clean build, v1.9)
    Fonts: Montserrat (headings/CTAs), Poppins (body)
    ========================================================= */
 
@@ -37,14 +37,12 @@ body{
   font-family:'Poppins',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;
   -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
 }
-
 h1,h2,h3,h4,h5,h6{
   font-family:'Montserrat',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;
   color:var(--bre-ink-2);
   line-height:1.25;
   margin:0 0 10px;
 }
-
 p{ margin:0 0 14px; line-height:1.7; color:#2a3c57 }
 a{ color:var(--bre-blue-600); text-decoration:none }
 a:hover{ color:var(--bre-blue-700); text-decoration:underline }
@@ -173,23 +171,27 @@ button:focus-visible, .btn:focus-visible, .hf-button:focus-visible{ outline:3px 
 }
 
 /* =========================================================
-   PROPERTY CARDS — distinctive look (no size changes)
+   PROPERTY CARDS — distinctive look + NO CLIPPING
    ========================================================= */
 .hf-card, .property-card, .listing, .card{
   background:#fff !important; border:1px solid #e8effc !important;
-  border-radius:var(--radius-lg) !important; overflow:hidden !important;
+  border-radius:var(--radius-lg) !important;
+  /* IMPORTANT: allow content to extend fully; stop cutting the last row */
+  overflow:visible !important;
   box-shadow:0 8px 26px rgba(11,42,97,.10) !important;
   transition:transform .16s ease, box-shadow .16s ease !important;
-  padding-bottom:10px !important;     /* ensures last row never gets trimmed */
+  padding-bottom:18px !important;     /* safe space above the rounded bottom */
 }
 .hf-card:hover, .property-card:hover, .listing:hover, .card:hover{
   transform:translateY(-4px) !important; box-shadow:0 16px 42px rgba(11,42,97,.16) !important;
 }
 
-/* Image: keep native aspect; just crisp bottom divider */
+/* Image: round only the top edges; no need to clip the card body */
 .hf-card img, .property-card img, .listing img, .card img{
   display:block !important; width:100% !important; height:auto !important; object-fit:cover !important;
   border-bottom:1px solid #eef3ff !important;
+  border-top-left-radius:var(--radius-lg) !important;
+  border-top-right-radius:var(--radius-lg) !important;
 }
 
 /* Titles / meta / price */
@@ -205,7 +207,7 @@ button:focus-visible, .btn:focus-visible, .hf-button:focus-visible{ outline:3px 
   color:#0e2f66 !important; font:800 15px/1 Montserrat,ui-sans-serif !important; margin:0 14px 12px !important
 }
 
-/* Stats/amenities (FIX: wrap so nothing is clipped) */
+/* Stats/amenities (wrap + spacing so nothing is clipped) */
 .hf-card .meta,
 .property-card .meta,
 .listing .meta,
@@ -215,16 +217,20 @@ button:focus-visible, .btn:focus-visible, .hf-button:focus-visible{ outline:3px 
 .listing [class*="amenit"],
 .card [class*="amenit"]{
   display:flex !important;
-  flex-wrap:wrap !important;              /* key: allows wrapping */
+  flex-wrap:wrap !important;           /* key: allows wrapping */
   gap:8px 10px !important;
-  margin:0 14px 12px !important;          /* breathing room at bottom edge */
-  overflow:visible !important;
+  margin:0 14px 0 !important;
+}
+.hf-card .meta > *,
+.property-card .meta > *,
+.listing .meta > *,
+.card .meta > *{
+  margin-bottom:8px !important;        /* row spacing */
 }
 
 /* =========================================================
-   “See all properties” tile — reduce footprint
+   “See all properties” tile — reduced footprint
    ========================================================= */
-/* Hostfully uses a few different labels; target common patterns */
 .hf-dbs [data-testid*="view-all"],
 .hf-dbs [class*="view-all"],
 .hf-dbs [class*="viewAll"],
@@ -242,7 +248,7 @@ button:focus-visible, .btn:focus-visible, .hf-button:focus-visible{ outline:3px 
   justify-content: center !important;
   text-align: center !important;
   box-shadow: var(--shadow-sm) !important;
-  flex: 0 0 auto !important;              /* prevent grid stretching it */
+  flex: 0 0 auto !important;           /* prevent grid from stretching it */
 }
 .hf-dbs [data-testid*="view-all"] *,
 .hf-dbs [class*="view-all"] *,
