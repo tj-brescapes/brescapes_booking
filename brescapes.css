@@ -1,181 +1,218 @@
-/* ================================
-   Blue Ridge Escapes Custom CSS
-   ================================ */
+/* =========================================================
+   Blue Ridge Escapes — brescapes.css (v3.1)
+   Branding: Montserrat (headings/CTAs), Poppins (body)
+   ========================================================= */
 
-/* Brand font and base styles */
-body, html {
-  font-family: 'Poppins', 'Segoe UI', Roboto, Arial, sans-serif !important;
-  color: #1a1a1a;
-  background-color: #f9fbfd;
+/* ---------- Base / Resets ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500;600&display=swap');
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;                 /* fixes right-side whitespace */
+  background: #f7fbff;
+  color: #0e1a2b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headings */
-h1, h2, h3, h4, h5 {
-  font-family: 'Poppins', sans-serif !important;
-  font-weight: 600;
-  color: #0d1c2e;
-  margin-bottom: 0.5em;
+img { max-width: 100%; height: auto; display: block; }
+
+:root{
+  --bre-blue-700:#1D46B7;
+  --bre-blue-600:#016FE7;
+  --bre-blue-400:#01BDF9;
+  --ink:#0e1a2b;
+  --ink-2:#17355e;
+  --grad:linear-gradient(135deg,var(--bre-blue-700),var(--bre-blue-600) 55%,var(--bre-blue-400));
+  --r-lg:16px; --r-md:12px; --r-pill:999px;
+  --shadow-xs:0 2px 8px rgba(11,42,97,.08);
+  --shadow-sm:0 6px 18px rgba(11,42,97,.10);
+  --shadow-md:0 12px 28px rgba(11,42,97,.16);
 }
 
-/* -------------------------------
-   Header
-   ------------------------------- */
-.bre-topnav {
-  background: #fff;
-  padding: 0.75rem 2rem;
-  border-bottom: 1px solid #e9f0fb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* ---------- Typography ---------- */
+body, p, a, li, span, input, button {
+  font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial !important;
+  font-weight: 400;
+}
+h1,h2,h3,h4,h5{
+  font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial !important;
+  color: var(--ink-2);
+  line-height: 1.25;
+  margin: 0 0 .5rem;
+}
+a { color: var(--bre-blue-600); text-decoration: none; }
+a:hover { color: var(--bre-blue-700); text-decoration: underline; }
+:focus-visible { outline: 2px solid rgba(1,189,249,.45); outline-offset: 2px; }
+
+/* =========================================================
+   HEADER — works for custom .bre-topnav and Hostfully header
+   ========================================================= */
+
+/* Your custom header (if present) */
+.bre-topnav{
+  position: sticky; top: 0; z-index: 2000;
+  background: #fff; box-shadow: var(--shadow-xs);
+}
+.bre-topnav .wrap{
+  max-width: 1200px; margin: 0 auto; padding: 10px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.bre-brand img{ height: 36px; }
+.bre-nav{ display:flex; gap:18px; align-items:center; flex-wrap:wrap; margin-left:auto }
+.bre-nav a{ font-weight:600; padding:8px 10px; border-radius:10px; color:#183049 }
+.bre-nav a:hover{ background:#eef5ff }
+
+/* Hostfully default white-label header (fallback) */
+header[data-testid="white-label-header"]{
+  position: sticky; top: 0; z-index: 2000;
+  background:#fff !important; box-shadow: var(--shadow-xs);
+}
+header[data-testid="white-label-header"] > div{
+  max-width: 1200px; margin: 0 auto; padding: 10px 20px !important;
+}
+header[data-testid="white-label-header"] a{
+  font-family:'Poppins', ui-sans-serif !important; font-weight:600 !important;
+  color:#183049 !important; letter-spacing:.2px;
+}
+header[data-testid="white-label-header"] a:hover{ color:#0e2f66 !important; text-decoration:none !important; }
+
+/* =========================================================
+   HERO — no negative margins or clipping; show normally
+   ========================================================= */
+.hf-dbs main.hf-dbs-content{ overflow: visible; }
+.hf-dbs main.hf-dbs-content [data-testid*="hero"],
+.hf-dbs main.hf-dbs-content .hero{
+  border-radius: var(--r-lg);
+  overflow: hidden;                 /* keep search box shadow clean */
+  box-shadow: var(--shadow-sm);
+}
+.hf-dbs .hf-search, .hf-dbs .search, .hf-dbs .hf-search-form{
+  margin-top: 12px;                 /* never overlap hero text */
+  background:#fff; border-radius:14px; padding:10px; box-shadow: var(--shadow-md);
 }
 
-.bre-topnav .bre-brand img {
-  height: 40px;
+/* =========================================================
+   BUTTONS (brand)
+   ========================================================= */
+button, .btn, .hf-button, .hf-primary-btn, input[type="submit"]{
+  font-family:'Montserrat', ui-sans-serif !important; font-weight:700 !important;
+  background: var(--grad) !important; color: #fff !important;
+  border: none !important; border-radius: var(--r-md) !important;
+  padding: 11px 16px !important;
+  box-shadow: 0 6px 18px rgba(1,111,231,.22) !important;
+  transition: transform .06s ease, filter .12s ease, box-shadow .12s ease !important;
+}
+button:hover, .btn:hover, .hf-button:hover, .hf-primary-btn:hover{
+  filter: brightness(1.05) saturate(1.05); box-shadow: 0 10px 26px rgba(1,111,231,.28) !important;
+}
+button:active, .btn:active, .hf-button:active, .hf-primary-btn:active{ transform: translateY(1px) !important; }
+
+/* =========================================================
+   PROPERTY CARDS — uniform media + safe badges + hover zoom
+   ========================================================= */
+
+/* Shell */
+.hf-card, .property-card, .listing, .card{
+  background:#fff !important; border:1px solid #e8effc !important;
+  border-radius: var(--r-lg) !important; overflow: hidden !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: transform .16s ease, box-shadow .16s ease !important;
+}
+.hf-card:hover, .property-card:hover, .listing:hover, .card:hover{
+  transform: translateY(-4px) !important; box-shadow: var(--shadow-md) !important;
 }
 
-.bre-nav a {
-  margin-left: 1.5rem;
-  text-decoration: none;
-  color: #0d47a1;
-  font-weight: 500;
-  transition: color 0.2s ease;
+/* IMAGE WRAPPER — uniform height + clip for hover zoom */
+.hf-card picture, .hf-card .media, .hf-card .image,
+.property-card picture, .property-card .media, .property-card .image,
+.listing picture, .listing .media, .listing .image,
+.card picture, .card .media, .card .image{
+  width:100% !important; height:240px !important;        /* uniform row */
+  overflow:hidden !important; position:relative !important;
+  border-top-left-radius: var(--r-lg) !important;
+  border-top-right-radius: var(--r-lg) !important;
 }
 
-.bre-nav a:hover {
-  color: #1565c0;
+/* IMAGE — hover zoom */
+.hf-card img, .property-card img, .listing img, .card img{
+  width:100% !important; height:100% !important; object-fit:cover !important;
+  transform: scale(1); transition: transform .35s ease !important;
+}
+.hf-card:hover img, .property-card:hover img, .listing:hover img, .card:hover img{
+  transform: scale(1.06) !important;                      /* subtle zoom */
 }
 
-/* -------------------------------
-   Hero Section
-   ------------------------------- */
-.hero {
-  position: relative;
-  text-align: center;
-  color: #fff;
+/* BODY spacing (ensures stats never reach rounded edge) */
+.hf-card .content, .property-card .content, .listing .content, .card .content,
+.hf-card .hf-card-body, .property-card .hf-card-body, .listing .hf-card-body, .card .hf-card-body{
+  padding: 12px 14px 16px !important;
 }
 
-.hero h1 {
-  font-size: 2.8rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+/* Titles / location */
+.hf-card h3, .property-card h3, .listing h3, .card h3{
+  font-family:'Montserrat', ui-sans-serif !important; font-weight:800 !important;
+  font-size:1.05rem !important; letter-spacing:.2px; color:var(--ink) !important;
+  margin: 6px 0 4px !important;
+}
+.hf-card .location, .listing .location, .card .location{
+  color:#4a5f7a !important; margin:0 0 10px !important; font:500 14px/1.3 Poppins,ui-sans-serif !important;
 }
 
-.hero h2 {
-  font-size: 1.4rem;
-  margin-top: 0.5rem;
-  color: #f5faff;
+/* Stats / amenity pills — wrap & stay inside */
+.hf-card .meta, .property-card .meta, .listing .meta, .card .meta,
+.hf-card [class*="amenit"], .property-card [class*="amenit"], .listing [class*="amenit"], .card [class*="amenit"]{
+  display:flex !important; flex-wrap:wrap !important; gap:8px 10px !important;
+  margin: 0 !important;
+}
+.hf-card .meta > *, .property-card .meta > *, .listing .meta > *, .card .meta > *{
+  margin-bottom:8px !important;            /* spacing between rows */
 }
 
-/* -------------------------------
-   Property Cards
-   ------------------------------- */
-.property-card {
-  border-radius: 16px !important;
-  overflow: hidden !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
-  background: #fff !important;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* =========================================================
+   “See all properties” tile — compact
+   ========================================================= */
+.hf-dbs [data-testid*="view-all"],
+.hf-dbs [class*="view-all"],
+.hf-dbs [class*="viewAll"],
+.hf-dbs a[aria-label*="See all"],
+.hf-dbs a[href*="/search"][class*="card"],
+.hf-dbs a[href*="/search"][class*="tile"]{
+  width:220px !important; height:260px !important;
+  min-width:200px !important; min-height:220px !important;
+  padding:16px !important; border-radius:16px !important;
+  display:flex !important; align-items:center !important; justify-content:center !important; text-align:center !important;
+  box-shadow: var(--shadow-sm) !important; flex: 0 0 auto !important;
+}
+.hf-dbs [data-testid*="view-all"] *, .hf-dbs [class*="view-all"] *, .hf-dbs [class*="viewAll"] *{
+  font-family:'Montserrat', ui-sans-serif !important; font-weight:700 !important; font-size:16px !important; line-height:1.2 !important;
 }
 
-.property-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+/* =========================================================
+   FOOTER — full-width, dark brand
+   ========================================================= */
+.bre-footer{
+  background:#0c1c34 !important; color:#e6f0ff !important;
+  width:100% !important; margin:0 auto !important;
+  padding:42px 20px 20px !important; box-sizing:border-box !important;
 }
+.bre-footer a{ color:#e6f0ff !important }
+.bre-footer a:hover{ color:#fff !important; text-decoration:underline }
+.bre-footer img{ height:40px; width:auto; display:block; margin-inline:auto }
+.bre-footer .grid{ max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(12,1fr); gap:24px }
+.bre-footer .col{ grid-column:span 12; text-align:center }
+.bre-footer .legal{ border-top:1px solid rgba(255,255,255,.14); margin-top:24px; padding-top:16px; font-size:12px; color:#bcd3ff }
 
-/* Force all images to be uniform */
-.property-card img {
-  width: 100%;
-  height: 220px !important;
-  object-fit: cover !important;
-  display: block;
-}
-
-/* Card body */
-.property-card .card-body {
-  padding: 1rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Title + location */
-.property-card h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0 0 0.25rem 0;
-  color: #0d1c2e;
-}
-
-.property-card .location {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 0.5rem;
-}
-
-/* Property stats row */
-.property-card .property-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  margin-top: auto;
-}
-
-.property-card .property-stats span {
-  background: #f1f5fa;
-  padding: 0.25rem 0.5rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  color: #333;
-}
-
-/* -------------------------------
-   Buttons
-   ------------------------------- */
-button, .btn, .see-all-btn {
-  background: linear-gradient(135deg, #1976d2, #42a5f5);
-  color: #fff !important;
-  border: none;
-  border-radius: 12px;
-  padding: 0.6rem 1.4rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: background 0.3s ease, transform 0.2s ease;
-  cursor: pointer;
-}
-
-button:hover, .btn:hover, .see-all-btn:hover {
-  background: linear-gradient(135deg, #1565c0, #2196f3);
-  transform: translateY(-2px);
-}
-
-.see-all-btn {
-  margin: 2rem auto 0;
-  display: block;
-  text-align: center;
-}
-
-/* -------------------------------
-   Footer
-   ------------------------------- */
-footer {
-  background: #0d1c2e;
-  color: #f1f5fa;
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-footer a {
-  color: #90caf9;
-  text-decoration: none;
-}
-
-footer a:hover {
-  color: #bbdefb;
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 820px){
+  .bre-topnav .wrap{ padding:8px 14px }
+  .bre-brand img{ height:32px }
+  .bre-nav{ gap:10px }
 }
