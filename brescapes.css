@@ -206,3 +206,76 @@ button:focus-visible {
   outline-offset: 2px;
   border-radius: 6px;
 }
+/* ========== HEADER: full-width like before ========== */
+.hf-dbs-header .bre-topnav {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: #fff;
+}
+
+.hf-dbs-header .bre-topnav .wrap {
+  max-width: 1400px;      /* adjust if you prefer wider */
+  margin: 0 auto;
+  padding: 12px 24px;
+}
+
+/* ========== HERO: stable selector, locked background ========== */
+.hf-dbs .hero-container {
+  /* your hero image */
+  --hero-url: url("https://orbirental-images.s3.amazonaws.com/5436ae8e-f34c-43ee-b18c-d263c9306945");
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+
+  /* size & layout */
+  min-height: 60vh;
+  padding: 6rem 1rem;
+
+  /* force the background so JS re-renders can't remove it */
+  background-image: var(--hero-url) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-color: transparent !important;
+
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* readable text over image */
+.hf-dbs .hero-container h1,
+.hf-dbs .hero-container h2 {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0,0,0,.45);
+  margin: .25rem 0;
+}
+
+/* subtle overlay to keep text crisp */
+.hf-dbs .hero-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.35));
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* spacing from search/filter area below if needed */
+.hf-dbs .hero-container + .search-filter-container {
+  margin-top: 1.25rem;
+}
+
+/* bigger on desktop */
+@media (min-width: 992px) {
+  .hf-dbs .hero-container {
+    min-height: 68vh;
+    padding: 8rem 2rem;
+  }
+}
+
