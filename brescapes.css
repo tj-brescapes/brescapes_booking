@@ -246,3 +246,72 @@ button:active, .btn:active, .hf-button:active, .hf-primary-btn:active{ transform
   .bre-brand img{ height:32px }
   .bre-nav{ gap:10px }
 }
+/* === BRE HERO PATCH (explicitly target Hostfully’s hero-container) === */
+.hero-container{
+  /* Ensure the block is tall and shows the background image */
+  min-height: clamp(320px, 42vh, 560px) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: transparent !important;
+
+  /* Nice rounded/raised look to match the rest of the theme */
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 6px 18px rgba(11,42,97,.10) !important;
+
+  position: relative;  /* for the overlay below */
+}
+
+/* Subtle readable overlay matching brand (very light) */
+.hero-container::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 20, 48, .18) 0%,
+    rgba(6, 20, 48, .08) 40%,
+    rgba(6, 20, 48, .26) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Headline/sub-headline readability */
+.hero-container h1,
+.hero-container h2{
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  text-align: center;
+  color: #f2f7ff !important;
+  text-shadow: 0 3px 12px rgba(0,0,0,.35);
+}
+.hero-container h1{ font-family: 'Montserrat', sans-serif !important; font-weight: 700; letter-spacing: .04em; }
+.hero-container h2{ font-family: 'Poppins', sans-serif !important; font-weight: 500; opacity: .95; }
+
+/* Keep the search panel comfortably below the hero */
+.hf-dbs .hf-search, .hf-dbs .search, .hf-dbs .hf-search-form{
+  margin-top: 14px !important;
+}
+/* Uniform property card media height — last-resort clamp */
+.hf-dbs :is(.hf-card, .property-card, .listing, .card, [data-testid*="property"], a[href*="/properties/"], article)
+  :is(picture, .media, .image){
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  overflow: hidden !important;
+  border-top-left-radius: 16px !important;
+  border-top-right-radius: 16px !important;
+}
+.hf-dbs :is(.hf-card, .property-card, .listing, .card, [data-testid*="property"], a[href*="/properties/"], article) img{
+  height: 100% !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  transform: scale(1); transition: transform .35s ease;
+}
+.hf-dbs :is(.hf-card, .property-card, .listing, .card, [data-testid*="property"], a[href*="/properties/"], article):hover img{
+  transform: scale(1.06);
+}
+
