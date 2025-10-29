@@ -1,333 +1,118 @@
-/* =========================================================
-   Blue Ridge Escapes — Hostfully DBS Theme
-   Version: 1.4
-   - Lighter hero overlay + brighter hero text
-   - Slightly taller hero (subhead visible above search)
-   - No cut-off intro paragraph
-   - Featured properties unhidden (stacking fixes)
-   ========================================================= */
-
-/* ---- Brand Tokens ---- */
-:root{
-  --bre-blue-700:#1D46B7;
-  --bre-blue-600:#016FE7;
-  --bre-blue-400:#01BDF9;
-  --bre-ink:#0E1A2B;
-  --bre-ink-2:#132a4b;
-  --bre-bg:#f8fbff;
-  --bre-white:#fff;
-
-  --bre-gradient:linear-gradient(135deg,var(--bre-blue-700) 0%,var(--bre-blue-600) 55%,var(--bre-blue-400) 100%);
-
-  --radius-lg:16px;
-  --shadow-sm:0 4px 16px rgba(0,0,0,.06);
-  --shadow-md:0 10px 30px rgba(11,42,97,.14);
+/***********************
+  BLUE RIDGE ESCAPES — GLOBAL BRAND POLISH
+***********************/
+:root {
+  --bre-blue-600: #1D46B7;
+  --bre-blue-500: #016FE7;
+  --bre-blue-400: #01BDF9;
+  --bre-dark: #0c1c34;
+  --bre-gradient: linear-gradient(135deg, #1D46B7 0%, #016FE7 50%, #01BDF9 100%);
+  --radius-lg: 16px;
+  --shadow-md: 0 10px 30px rgba(11,42,97,.12);
+  --shadow-sm: 0 4px 12px rgba(11,42,97,.08);
 }
 
-/* ---- Base ---- */
-html{scroll-behavior:smooth}
-body{
-  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-  background:var(--bre-bg); color:var(--bre-ink);
-  font-family:"Poppins",ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
-}
-h1,h2,h3,h4{font-family:"Helvetica Neue",Helvetica,Arial,system-ui,-apple-system,sans-serif; color:var(--bre-ink)}
-a{color:var(--bre-blue-600); text-decoration:none}
-a:hover{color:var(--bre-blue-700); text-decoration:underline}
-:focus-visible{outline:2px solid var(--bre-blue-400); outline-offset:2px}
+/* 1) Header / Nav */
+.bre-topnav { background: #fff; border-bottom: 1px solid #eee; }
+.bre-topnav .wrap { display:flex; align-items:center; justify-content:space-between; max-width:1200px; margin:auto; padding:12px 20px; gap:20px; }
+.bre-brand img { height:38px; width:auto; max-width:220px; object-fit:contain; }
+.bre-nav{ display:flex; align-items:center; gap:18px; flex-wrap:wrap }
+.bre-nav a { font:600 14px/1 Poppins,ui-sans-serif; color:#183049; text-decoration:none; padding:8px 10px; border-radius:10px; }
+.bre-nav a:hover{ background:#eef5ff }
+.bre-cta{ background:var(--bre-gradient); color:#fff !important; font-weight:700; padding:10px 16px; border-radius:999px; }
 
-/* ---- Content Width ---- */
-.container,.content,.main,.page-content{max-width:1200px; margin-inline:auto; padding-inline:20px}
-
-/* =========================================================
-   HEADER (matches Header HTML)
-   ========================================================= */
-html.bre-theme body{ background:var(--bre-bg) }
-
-.bre-topnav{position:sticky; top:0; z-index:1000; background:#fff; box-shadow:var(--shadow-sm)}
-.bre-topnav .wrap{
-  max-width:1200px; margin:auto; padding:12px 20px;
-  display:flex; align-items:center; justify-content:space-between; gap:16px;
-}
-.bre-brand{display:flex; align-items:center; gap:10px}
-.bre-brand img{display:block; height:38px; width:auto; max-width:220px; object-fit:contain}
-.bre-brand .tag{font:600 14px/1.2 Poppins,ui-sans-serif; color:#345}
-.bre-nav{display:flex; align-items:center; gap:18px; flex-wrap:wrap}
-.bre-nav a{
-  font:600 14px/1 Poppins,ui-sans-serif; color:#183049; padding:8px 10px; border-radius:10px;
-  position:relative; transition:color .18s ease;
-}
-.bre-nav a:hover{background:#eef5ff}
-.bre-cta{background:var(--bre-gradient); color:#fff !important; font-weight:700; padding:10px 16px; border-radius:999px; box-shadow:var(--shadow-sm)}
-@media (max-width:820px){ .bre-topnav .wrap{flex-direction:column; align-items:flex-start; gap:10px} .bre-nav{width:100%; justify-content:space-between} }
-
-/* =========================================================
-   HOMEPAGE HERO + SEARCH (lighten overlay, taller hero, safe stacking)
-   ========================================================= */
-
-/* Keep content panes free from clipping and weird overlays */
-.hf-dbs main.hf-dbs-content > *{ position:relative; z-index:auto; overflow:visible !important }
-
-/* HERO: select first block inside main (Hostfully uses hashed classes) */
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child{
-  /* neutralize padding/min-height tricks */
-  padding:0 !important; min-height:0 !important;
-
-  /* a touch taller so subtitle clears the search bar */
-  height: clamp(320px, 40vh, 460px) !important;
-  max-height:460px !important;
-
-  border-radius:var(--radius-lg) !important;
-  overflow:hidden !important;
-  box-shadow:var(--shadow-md) !important;
-  background-size:cover !important; background-position:center !important;
+@media (max-width: 820px){
+  .bre-topnav .wrap{ flex-direction:column; align-items:flex-start; gap:10px }
+  .bre-nav{ width:100%; justify-content:space-between }
 }
 
-/* Lighter overlay on the hero (so image isn’t too dark) */
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child::after{
-  content:"";
-  position:absolute; inset:0;
-  /* very light darkening only; keeps brand image visible */
-  background:linear-gradient(0deg, rgba(0,0,0,.20) 0%, rgba(0,0,0,.10) 100%);
-  pointer-events:none;
-}
-
-/* Brighten hero text for readability */
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child h1,
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child h2,
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child h3,
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child p,
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child span{
-  color:#f3f8ff !important;
-  text-shadow:0 2px 10px rgba(0,0,0,.28);
-}
-
-/* If the hero contains IMG/PICTURE, make it cover the clamp */
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child img,
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child picture,
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child picture img{
-  width:100% !important; height:100% !important; display:block !important;
-  object-fit:cover !important; object-position:center !important; border-radius:var(--radius-lg) !important;
-}
-/* In case there’s an inner wrapper */
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child > *{ height:100% !important }
-
-/* Spacing around hero so headings/paragraphs never get clipped */
-html.bre-theme body.hf-dbs main.hf-dbs-content{ padding-top:16px !important }
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child{ margin:0 0 24px 0 !important }
-
-/* Search pill: gentle overlap, but leave room below for subhead/intro */
-html.bre-theme body.hf-dbs .hf-search, html.bre-theme body.hf-dbs .search{
-  margin-top:-8px !important;   /* subtle float over hero */
-  margin-bottom:24px !important;/* guarantees subhead/paragraph aren’t cut off */
-  position:relative !important; z-index:2 !important;
-  border-radius:14px !important; background:#fff !important;
-  box-shadow:var(--shadow-md) !important; padding:10px !important;
-}
-@media (max-width:900px){
-  html.bre-theme body.hf-dbs .hf-search, html.bre-theme body.hf-dbs .search{ margin-top:0 !important }
-}
-
-/* Headings & intro just after hero */
-.hf-dbs main.hf-dbs-content h1{ margin-top:0 !important; margin-bottom:10px !important; color:var(--bre-ink-2) }
-.hf-dbs main.hf-dbs-content h2,.hf-dbs main.hf-dbs-content h3{ color:var(--bre-ink-2) }
-.hf-dbs main.hf-dbs-content p{ margin:0 0 16px 0; line-height:1.65; color:#273b57 }
-
-/* Safety: any section wrappers should not hide content following them */
-.hf-dbs main.hf-dbs-content > section,
-.hf-dbs main.hf-dbs-content > div{ overflow:visible !important }
-
-/* =========================================================
-   FEATURED PROPERTIES / LISTINGS (visibility + polish)
-   ========================================================= */
-
-/* Re-enable cards if some Hostfully skins toggle them off or they get covered */
-.hf-dbs .hf-card, .hf-dbs .property-card, .hf-dbs .listing, .hf-dbs .card{
-  display:block !important; visibility:visible !important; opacity:1 !important;
-  border:1px solid #e6eefc; border-radius:16px; overflow:hidden; background:#fff;
-  box-shadow:0 6px 24px rgba(11,42,97,.08);
-  transition:transform .18s ease, box-shadow .18s ease;
-}
-.hf-dbs .hf-card:hover, .hf-dbs .property-card:hover, .hf-dbs .listing:hover, .hf-dbs .card:hover{
-  transform:translateY(-3px); box-shadow:0 12px 36px rgba(11,42,97,.14);
-}
-
-/* Ensure the grid area itself is not collapsed or hidden under the hero/search */
-.hf-dbs [class*="featured"], 
-.hf-dbs [data-testid*="featured"],
-.hf-dbs [class*="properties"],
-.hf-dbs [data-testid*="properties"]{
-  position:relative; z-index:1;
-  margin-top:22px !important;
-}
-
-/* Visual consistency for listing images */
-.hf-dbs .hf-card img, .hf-dbs .property-card img, .hf-dbs .listing img, .hf-dbs .card img{
-  width:100%; display:block; object-fit:cover; aspect-ratio:3/2;
-}
-
-/* Card text polish */
-.hf-dbs .hf-card h3, .hf-dbs .property-card h3, .hf-dbs .listing h3, .hf-dbs .card h3{
-  font-family:"Helvetica Neue",Helvetica,Arial,system-ui,-apple-system,sans-serif;
-  font-weight:700; font-size:1.02rem; color:var(--bre-ink-2); margin:10px 12px 6px;
-}
-.hf-dbs .hf-card .price, .hf-dbs .listing .price, .hf-dbs .card .price{
-  color:#0e2f66; font-weight:700; margin:0 12px 12px;
-}
-
-/* If a Hostfully section wrapper adds accidental huge padding, tame it */
-.hf-dbs [class*="section"], .hf-dbs [data-testid*="section"]{
-  padding-top:min(32px, 4vh) !important; padding-bottom:min(32px, 4vh) !important;
-}
-
-/* =========================================================
-   FORMS / BUTTONS
-   ========================================================= */
-button,.btn,.button,.hf-button,.hf-primary-btn,input[type="submit"]{
-  background:var(--bre-gradient) !important; color:#fff !important;
-  border:none; border-radius:12px; padding:10px 16px; font-weight:700;
-  box-shadow:var(--shadow-sm); transition:transform .06s ease, filter .12s ease;
-}
-button:hover,.btn:hover,.button:hover,.hf-button:hover,.hf-primary-btn:hover,input[type="submit"]:hover{
-  filter:brightness(1.05) saturate(1.05);
-}
-button:active,.btn:active,.button:active,.hf-button:active,.hf-primary-btn:active,input[type="submit"]:active{
-  transform:translateY(1px);
-}
-input,select,textarea{
-  border-radius:12px !important; border:1px solid #dbe6ff !important;
-  padding:12px 14px !important; background:#fff !important;
-}
-input:focus,select:focus,textarea:focus{
-  border-color:var(--bre-blue-600) !important; box-shadow:0 0 0 3px rgba(1,189,249,.15) !important; outline:none !important;
-}
-
-/* =========================================================
-   FOOTER (matches Footer HTML)
-   ========================================================= */
-.bre-footer{
-  background:#0c1c34 !important; color:#cfe2ff !important;
-  padding:36px 20px 18px;
-}
-.bre-footer a{color:#e6f0ff}
-.bre-footer a:hover{color:#fff; text-decoration:underline}
-.bre-footer img{display:block; height:40px; width:auto; object-fit:contain; filter:none !important}
-
-.bre-footer .grid{ display:grid; gap:24px; max-width:1200px; margin:auto; grid-template-columns:repeat(12,1fr) }
-.bre-footer .col{grid-column:span 12}
-
-/* Link row centered */
-.bre-footer .col--links ul{
-  list-style:none; padding:0; margin:0;
-  display:flex; flex-wrap:wrap; justify-content:center; gap:30px;
-}
-
-/* Center the logo + business block */
-.bre-footer .col--logo{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center }
-
+/* 2) Footer */
+.bre-footer{ background:var(--bre-dark) !important; color:#cfe2ff !important; padding:36px 20px 18px; }
+.bre-footer img{ display:block; height:40px; width:auto; object-fit:contain; filter:none !important; }
+.bre-footer a{ color:#e6f0ff }
+.bre-footer a:hover{ color:#fff; text-decoration:underline }
+.bre-footer .grid{ display:grid; gap:24px; max-width:1200px; margin:auto; grid-template-columns: repeat(12, 1fr); }
+.bre-footer .col{ grid-column: span 12 }
 @media (min-width:900px){
-  .bre-footer .col--logo{grid-column:span 4}
-  .bre-footer .col--links{grid-column:span 5}
-  .bre-footer .col--cta{grid-column:span 3}
+  .bre-footer .col--logo{ grid-column: span 4 }
+  .bre-footer .col--links{ grid-column: span 5 }
+  .bre-footer .col--cta{ grid-column: span 3 }
 }
-.bre-footer .legal{
-  border-top:1px solid rgba(255,255,255,.12);
-  margin-top:24px; padding-top:16px; font-size:12px; color:#9fc0ff; text-align:center;
+.bre-footer .legal{ border-top:1px solid rgba(255,255,255,.12); margin-top:24px; padding-top:16px; font-size:12px; color:#9fc0ff; }
+.bre-footer .col--logo{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+
+/* 3) Links */
+a{ color:var(--bre-blue-500) }
+a:hover{ color:var(--bre-blue-600) }
+
+/* Hide Hostfully defaults */
+.hf-default-header, .hf-default-footer{ display:none !important }
+
+/* Safety: prevent image collapse */
+.bre-topnav img, .bre-footer img{ min-height:24px }
+
+/***********************
+  HOMEPAGE POLISH
+***********************/
+
+/* HERO / BANNER — restore natural Hostfully sizing (no clamp) */
+.hf-hero,
+.hero,
+.home-hero,
+.banner,
+.header-image,
+.hf-landing-hero,
+.section-hero,
+.page-hero {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  min-height: unset !important;
+  height: auto !important;         /* natural size */
 }
 
-/* =========================================================
-   UTILITIES / SAFETY
-   ========================================================= */
-.hf-default-header,.hf-default-footer{display:none !important}
-.bre-topnav img,.bre-footer img{min-height:24px} /* prevents image collapse on slow loads */
-
-/* Keep layout snug but breathable site-wide */
-.hf-dbs .container,.hf-dbs .content,.hf-dbs .main,.hf-dbs .page-content{
-  max-width:1200px; margin-inline:auto; padding-inline:20px;
-}
-/***** BRE v1.5 — Fixes: hero subhead cut, intro text clipping, /search visibility *****/
-
-/* 1) Give the hero a touch more room so the subhead clears the search pill */
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child{
-  height: clamp(340px, 42vh, 500px) !important; /* was 320/460 */
-  max-height: 500px !important;
+/* Hero images display in original ratio */
+.hf-hero img,
+.hero img,
+.banner img,
+.header-image img,
+.hf-landing-hero img {
+  width: 100%;
+  height: auto !important;          /* no forced height */
+  object-fit: cover;
+  object-position: center center;
+  display: block;
 }
 
-/* 2) Reduce the search bar overlap and guarantee space below it */
-html.bre-theme body.hf-dbs .hf-search,
-html.bre-theme body.hf-dbs .search{
-  margin-top: -4px !important;     /* softer overlap so text under hero stays visible */
-  margin-bottom: 28px !important;  /* ensures "Find an Escape" + intro paragraph aren't cut */
-  z-index: 3 !important;
-}
-@media (max-width: 900px){
-  html.bre-theme body.hf-dbs .hf-search,
-  html.bre-theme body.hf-dbs .search{
-    margin-top: 0 !important;      /* no overlap on mobile */
-    margin-bottom: 24px !important;
-  }
+/* Search bar styling — overlaps slightly but doesn’t cut text */
+.hf-search, .search {
+  margin-top: -20px;
+  position: relative;
+  z-index: 2;
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  background: #fff;
+  padding: 10px;
 }
 
-/* 3) Never let the blocks right after the hero clip text */
-.hf-dbs main.hf-dbs-content > *{
+/* Intro text and sections — ensure full visibility */
+.hf-dbs main.hf-dbs-content > * {
   overflow: visible !important;
-  max-height: none !important;     /* guard vs. theme max-heights */
-  -webkit-mask-image: none !important; mask-image: none !important; /* guard vs. fade masks */
+  max-height: none !important;
+}
+.hf-dbs main.hf-dbs-content h1, 
+.hf-dbs main.hf-dbs-content p {
+  margin-bottom: 16px;
+  line-height: 1.6;
 }
 
-/* Headings & paragraphs directly under hero get breathing room */
-.hf-dbs main.hf-dbs-content h1 + p,
-.hf-dbs main.hf-dbs-content h2 + p{
-  margin-top: 6px !important;
+/* Property cards */
+.hf-dbs .hf-card, .hf-dbs .property-card, .hf-dbs .listing, .hf-dbs .card {
+  display:block; border:1px solid #e6eefc; border-radius:16px;
+  background:#fff; overflow:hidden;
+  box-shadow:0 6px 24px rgba(11,42,97,.08);
 }
-
-/* 4) Make sure "Featured" sections and property grids actually render */
-.hf-dbs [class*="featured"],
-.hf-dbs [data-testid*="featured"],
-.hf-dbs [class*="properties"],
-.hf-dbs [data-testid*="properties"],
-.hf-dbs [class*="results"],
-.hf-dbs [data-testid*="results"],
-.hf-dbs [class*="listings"],
-.hf-dbs [data-testid*="list"]{
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  z-index: 1 !important;
-  height: auto !important;
-  min-height: 240px !important;    /* prevents accidental collapse */
-  overflow: visible !important;
-  margin-top: 22px !important;
+.hf-dbs .hf-card img, .hf-dbs .property-card img, .hf-dbs .listing img, .hf-dbs .card img {
+  width:100%; height:auto; object-fit:cover; aspect-ratio:3/2;
 }
-
-/* 5) Property cards & images — standardize (also affects /search) */
-.hf-dbs .hf-card, .hf-dbs .property-card, .hf-dbs .listing, .hf-dbs .card{
-  display: block !important;
-  border: 1px solid #e6eefc; border-radius: 16px;
-  background: #fff; overflow: hidden;
-  box-shadow: 0 6px 24px rgba(11,42,97,.08);
-}
-.hf-dbs .hf-card img, .hf-dbs .property-card img, .hf-dbs .listing img, .hf-dbs .card img{
-  width: 100%; display: block; object-fit: cover; aspect-ratio: 3/2;
-}
-
-/* 6) Extra safety on page wrappers so nothing overlays results/content */
-.hf-dbs main.hf-dbs-content{
-  padding-bottom: 32px !important; /* guarantee space after intro before feature grid */
-}
-.hf-dbs main.hf-dbs-content > *:nth-child(2){
-  margin-top: 16px !important;     /* intro block directly after hero */
-}
-
-/* 7) Lighten hero overlay just a bit more for readability (keeps brand image) */
-html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child::after{
-  background: linear-gradient(0deg, rgba(0,0,0,.16) 0%, rgba(0,0,0,.08) 100%) !important;
-}
-
-/* 8) Typography tweak: intro paragraph line-height for easy reading */
-.hf-dbs main.hf-dbs-content p{
-  line-height: 1.7 !important;
-}
-
-
