@@ -1,188 +1,212 @@
-/* ===============================
-   Blue Ridge Escapes Custom CSS
-   =============================== */
-
-/* Font imports */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Helvetica+Now:wght@400;500;700&display=swap');
-
-/* Global Reset + Fonts */
-body, h1, h2, h3, h4, h5, h6, p, a, button, input, select, textarea {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #000000;
+/* ===========================
+   Blue Ridge Escapes – Brand
+   =========================== */
+:root{
+  --bre-blue:#016FE7;
+  --bre-blue-light:#01BDF9;
+  --bre-navy:#1D46B7;
+  --bre-text:#000000;
+  --bre-white:#ffffff;
 }
 
-h1, h2, h3 {
-  font-family: 'Helvetica Now', sans-serif;
+/* Kill any unexpected spacing */
+html, body { margin:0 !important; padding:0 !important; }
+
+/* ===========================
+   HEADER (Hostfully wrapper)
+   =========================== */
+/* Make the Hostfully header area solid, full width, and above hero */
+.hf-dbs-header,
+[data-testid="white-label-header"]{
+  background: var(--bre-white) !important;
+  position: relative !important;
+  z-index: 20 !important;
+  width: 100% !important;
+  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+}
+
+/* Your custom header bar */
+.bre-topnav{
+  width:100% !important;
+  background: var(--bre-white) !important;
+  border: 0 !important;
+  padding: 10px 24px !important;
+  box-sizing: border-box !important;
+}
+
+.bre-topnav .wrap{
+  max-width: 1320px;
+  margin: 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+
+/* Brand block */
+.bre-brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none !important;
+}
+.bre-brand img{
+  display:block;
+  height:56px;
+  width:auto;
+}
+.bre-brand .tag{
+  color: var(--bre-navy);
+  font: 500 14px/1.2 "Poppins",system-ui,sans-serif;
+  white-space:nowrap;
+}
+
+/* Primary nav */
+.bre-nav{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+}
+.bre-nav > a{
+  color: var(--bre-navy) !important;
+  text-decoration:none !important;
+  font: 500 15px/1 "Poppins",system-ui,sans-serif;
+}
+.bre-nav > a:hover{
+  color: var(--bre-blue-light) !important;
+  text-decoration: none !important;
+}
+
+/* Dropdown */
+details.bre-dropdown{
+  position:relative;
+}
+details.bre-dropdown > summary{
+  list-style:none;
+  cursor:pointer;
+  color: var(--bre-navy);
+  font: 600 15px/1 "Poppins",system-ui,sans-serif;
+}
+details.bre-dropdown > summary::-webkit-details-marker{ display:none; }
+details.bre-dropdown[open] > .bre-menu{
+  display:block;
+}
+.bre-menu{
+  display:none;
+  position:absolute;
+  top: calc(100% + 10px);
+  right:0;
+  min-width:240px;
+  background:#fff;
+  border:1px solid #e8e8e8;
+  border-radius:10px;
+  padding:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  z-index: 100;
+}
+.bre-menu .bre-link{
+  display:block;
+  padding:10px 12px;
+  border-radius:8px;
+  color:#2a2a2a !important;
+  text-decoration:none !important;
+  font: 500 14px/1.2 "Poppins",system-ui,sans-serif;
+}
+.bre-menu .bre-link:hover{
+  background:#f6f9ff;
+  color: var(--bre-blue) !important;
+}
+
+/* ===========================
+   HERO
+   =========================== */
+/* Ensure hero is below header and visible */
+.hero-container{
+  background:
+    linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.35)),
+    url("https://orbirental-images.s3.amazonaws.com/5436ae8e-f34c-43ee-b18c-d263c9306945")
+      center/cover no-repeat !important;
+  min-height: 420px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex-direction:column !important;
+  text-align:center !important;
+  padding: 80px 16px 64px !important;
+  color:#fff !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Headline & subhead */
+.hero-container [data-testid="agency-headline"]{
+  margin:0 0 8px;
+  font: 700 44px/1.1 "Poppins",system-ui,sans-serif;
+  letter-spacing:.5px;
+  color:#fff !important;
   text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 1px;
+}
+.hero-container [data-testid="agency-sub-headline"]{
+  margin:0;
+  font: 400 20px/1.3 "Poppins",system-ui,sans-serif;
+  color:#EAF2FF !important;
 }
 
-/* ===============================
-   Header
-   =============================== */
-.bre-topnav {
-  background-color: #ffffff;
-  border-bottom: 2px solid #eaeaea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 30px;
-  width: 100%;
-  position: relative;
-  z-index: 1000;
+/* ===========================
+   HOSTFULLY BUTTONS (Search, etc.)
+   =========================== */
+.btn.btn-primary,
+button[data-testid="app-button"]{
+  background: var(--bre-blue) !important;
+  border: none !important;
+  color:#fff !important;
+  border-radius:10px !important;
+  padding:10px 18px !important;
+}
+.btn.btn-primary:hover,
+button[data-testid="app-button"]:hover{
+  background: var(--bre-blue-light) !important;
 }
 
-.bre-topnav .wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1400px;
+/* ===========================
+   FOOTER (darker than header)
+   =========================== */
+.hf-dbs-footer .bre-footer{
+  background: var(--bre-navy) !important;   /* darker than header */
+  color:#ffffff !important;
+  padding: 48px 20px !important;
+  width:100% !important;
+}
+.hf-dbs-footer .bre-footer a{
+  color: var(--bre-blue-light) !important;
+  text-decoration:none !important;
+  font-weight:500;
+}
+.hf-dbs-footer .bre-footer a:hover{
+  text-decoration:underline !important;
+}
+.hf-dbs-footer .bre-footer .biz-name{
+  color:#fff !important;
+}
+.hf-dbs-footer .bre-footer .address,
+.hf-dbs-footer .bre-footer .phone a,
+.hf-dbs-footer .bre-footer .legal{
+  color:#f2f6ff !important;
 }
 
-.bre-topnav a {
-  font-family: 'Helvetica Now', sans-serif;
-  font-weight: 500;
-  color: #1d46b7;
-  text-decoration: none;
-  margin: 0 15px;
-  font-size: 15px;
+/* Ensure footer year script has a target to write into even if loaded early */
+#footerYear{}
+
+/* ===========================
+   MISC TWEAKS
+   =========================== */
+/* Property card titles on brand */
+[data-testid="property-card-public-name"]{
+  color: var(--bre-navy) !important;
+  font-weight:700 !important;
+  text-transform:none !important;
 }
 
-.bre-topnav a:hover {
-  color: #01BDF9;
-}
-
-/* ===============================
-   Hero Section
-   =============================== */
-.hero-container {
-  background: url("https://orbirental-images.s3.amazonaws.com/5436ae8e-f34c-43ee-b18c-d263c9306945") center center / cover no-repeat;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 80px 20px;
-  position: relative;
-}
-
-.hero-container h1 {
-  color: #ffffff;
-  font-size: 42px;
-  font-family: 'Helvetica Now', sans-serif;
-  font-weight: 700;
-}
-
-.hero-container h2 {
-  color: #eaf4ff;
-  font-size: 22px;
-  font-family: 'Poppins', sans-serif;
-  margin-top: 10px;
-}
-
-/* ===============================
-   Property Cards
-   =============================== */
-.property-card {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #ffffff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.property-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-.property-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-
-.property-card .details {
-  padding: 15px;
-  font-family: 'Poppins', sans-serif;
-  color: #333;
-}
-
-.property-card .details h3 {
-  font-family: 'Helvetica Now', sans-serif;
-  font-size: 18px;
-  color: #1d46b7;
-}
-
-.property-card .details p {
-  font-size: 14px;
-  line-height: 1.5;
-  color: #555;
-}
-
-/* Property stats */
-.property-card .stats {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  font-size: 13px;
-  color: #000;
-  margin-top: 10px;
-}
-
-/* Buttons */
-button, .btn, .cta-button {
-  background-color: #016FE7;
-  color: #ffffff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-family: 'Helvetica Now', sans-serif;
-  text-transform: uppercase;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button:hover, .btn:hover, .cta-button:hover {
-  background-color: #01BDF9;
-}
-
-/* ===============================
-   Footer
-   =============================== */
-.brescapes-footer {
-  background-color: #1d46b7;
-  color: #ffffff;
-  padding: 50px 20px;
-  text-align: center;
-}
-
-.brescapes-footer a {
-  color: #01BDF9;
-  text-decoration: none;
-  font-family: 'Poppins', sans-serif;
-}
-
-.brescapes-footer a:hover {
-  text-decoration: underline;
-}
-
-.brescapes-footer .biz-name {
-  font-family: 'Helvetica Now', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 15px 0 5px;
-  font-size: 14px;
-}
-
-.brescapes-footer .copyright {
-  font-size: 13px;
-  margin-top: 10px;
-}
+/* Remove accidental underline on all header links */
+.bre-topnav a, .bre-topnav a:visited{ text-decoration:none !important; }
