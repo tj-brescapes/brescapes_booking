@@ -917,3 +917,76 @@ button[data-testid="see-all-properties-button"],
 @media (max-width: 768px){
   .bre-theme .hero-container{ min-height: 44vh !important; padding: 4rem 1rem 3rem !important; }
 }
+/* ===== Fix 1: Make header/top banner full-bleed again ===== */
+header, .header, .top-banner, .header-container {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* If you used a global max-width on everything, undo it for the shell */
+body > header,
+body > .hero-container,
+body > .app,
+body > .main,
+body > footer {
+  max-width: none !important;
+}
+
+/* ===== Fix 2: Show the Hostfully hero background image ===== */
+/* Hostfully renders a .hero-container with a background image. Ensure it has height and isn't covered. */
+.hero-container {
+  position: relative;
+  width: 100%;
+  min-height: clamp(320px, 48vh, 700px); /* give it real height */
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  overflow: hidden;
+}
+
+/* If an overlay exists, make it translucent instead of opaque */
+.hero-container::after,
+.hero-container::before {
+  /* Some themes use ::before/::after for dark overlays—keep it subtle */
+  background: rgba(0, 0, 0, 0.35) !important; /* adjust to taste */
+}
+
+/* Headings on top of the image */
+.hero-container h1,
+.hero-container h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0.25em 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+
+/* ===== Common culprits to neutralize (only if present) ===== */
+
+/* If you have a broad rule like this somewhere, it shrinks the header/hero—neutralize it */
+header, nav, main, footer, .container, .content, .wrapper {
+  /* remove global max width from layout shells */
+  max-width: none !important;
+}
+
+/* If a reset set every background to none, restore the hero background */
+.hero-container,
+.hero-container * {
+  background-image: inherit !important;
+  background-color: transparent !important;
+}
+
+/* Sometimes an absolute child covers the hero; make sure it doesn't block clicks/visibility */
+.hero-container > .overlay,
+.hero-container > .scrim {
+  pointer-events: none;
+}
+
+/* If images were swapped for a <picture> inside the hero, prefer the CSS background */
+.hero-container picture,
+.hero-container img {
+  display: none;
+}
+
