@@ -61,3 +61,82 @@ a:hover{ color:var(--bre-blue-700); text-decoration:underline }
   display:flex; gap:16px; align-items:center; justify-content:space-between;
   max-width:1200px; margin:auto; padding:12px 20px;
 }
+/* ===== BRE Hardening: Header & Footer ===== */
+
+/* Ensure our theme class is present defensively */
+html:not(.bre-theme) { }
+html.bre-theme body { background:#f8fbff; }
+
+/* 1) Header */
+.bre-topnav{
+  position:sticky; top:0; z-index:1000;
+  background:#ffffff;
+  box-shadow:0 4px 16px rgba(0,0,0,.06);
+}
+.bre-topnav .wrap{
+  max-width:1200px; margin:auto;
+  padding:12px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.bre-brand{ display:flex; align-items:center; gap:10px }
+.bre-brand img{
+  display:block; height:38px; width:auto;
+  max-width:220px; object-fit:contain;
+}
+.bre-brand .tag{ font:600 14px/1.2 Poppins,ui-sans-serif; color:#345 }
+
+.bre-nav{ display:flex; align-items:center; gap:18px; flex-wrap:wrap }
+.bre-nav a{
+  font:600 14px/1 Poppins,ui-sans-serif; color:#183049; text-decoration:none;
+  padding:8px 10px; border-radius:10px;
+}
+.bre-nav a:hover{ background:#eef5ff }
+.bre-cta{
+  background:linear-gradient(135deg,#1D46B7 0%, #016FE7 50%, #01BDF9 100%);
+  color:#fff !important; font-weight:700; padding:10px 16px; border-radius:999px;
+}
+
+/* Mobile header */
+@media (max-width: 820px){
+  .bre-topnav .wrap{ flex-direction:column; align-items:flex-start; gap:10px }
+  .bre-nav{ width:100%; justify-content:space-between }
+}
+
+/* 2) Footer */
+.bre-footer{
+  background:#0c1c34 !important; color:#cfe2ff !important;
+  padding:36px 20px 18px;
+}
+.bre-footer img{
+  display:block; height:40px; width:auto; object-fit:contain;
+  filter:none !important; /* prevent accidental inversion */
+}
+.bre-footer a{ color:#e6f0ff }
+.bre-footer a:hover{ color:#fff; text-decoration:underline }
+
+.bre-footer .grid{
+  display:grid; gap:24px; max-width:1200px; margin:auto;
+  grid-template-columns: repeat(12, 1fr);
+}
+.bre-footer .col{ grid-column: span 12 }
+@media (min-width:900px){
+  .bre-footer .col--logo{ grid-column: span 4 }
+  .bre-footer .col--links{ grid-column: span 5 }
+  .bre-footer .col--cta{ grid-column: span 3 }
+}
+.bre-footer .legal{
+  border-top:1px solid rgba(255,255,255,.12);
+  margin-top:24px; padding-top:16px; font-size:12px; color:#9fc0ff;
+}
+
+/* 3) Cards/links subtle polish (optional, safe) */
+a{ color:#016FE7 }
+a:hover{ color:#1D46B7 }
+
+/* 4) Hide Hostfully defaults if they peek through */
+.hf-default-header, .hf-default-footer{ display:none !important }
+
+/* 5) Prevent image collapse if path is valid but late to load */
+.bre-topnav img, .bre-footer img{ min-height:24px }
+
+
