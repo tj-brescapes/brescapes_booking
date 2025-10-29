@@ -127,7 +127,7 @@ details.bre-dropdown[open] > .bre-menu{
     linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.35)),
     url("https://orbirental-images.s3.amazonaws.com/5436ae8e-f34c-43ee-b18c-d263c9306945")
       center/cover no-repeat !important;
-  min-height: 420px !important;
+  min-height: 315px !important;
   display:flex !important;
   align-items:center !important;
   justify-content:center !important;
@@ -293,6 +293,7 @@ button[data-testid="app-button"]:disabled{
 .hero-container h2 {
   text-shadow: 0 2px 6px rgba(0,0,0,0.6);
 }
+
 
 
 
