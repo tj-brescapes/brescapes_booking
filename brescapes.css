@@ -1,13 +1,8 @@
 /* =========================================================
-   Blue Ridge Escapes — brescapes.css (v3.2)
-   Fixes:
-   • Restore hero image (scoped height:100% for hero media)
-   • Keep uniform property cards + hover zoom
-   • No right-side whitespace; footer full width
-   Branding: Montserrat (headings/CTAs), Poppins (body)
+   Blue Ridge Escapes — brescapes.css (v3.3)
+   Hero rendering fix + uniform cards + header/footer polish
    ========================================================= */
 
-/* ---------- Base / Resets ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500;600&display=swap');
 
 *,
@@ -17,14 +12,14 @@
 html, body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;                 /* fixes right-side whitespace */
+  overflow-x: hidden;                 /* stop right-side whitespace */
   background: #f7fbff;
   color: #0e1a2b;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Global images (safe defaults) */
+/* SAFE global images; hero is handled below */
 img { max-width: 100%; height: auto; display: block; }
 
 :root{
@@ -40,7 +35,7 @@ img { max-width: 100%; height: auto; display: block; }
   --shadow-md:0 12px 28px rgba(11,42,97,.16);
 }
 
-/* ---------- Typography ---------- */
+/* Typography */
 body, p, a, li, span, input, button {
   font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial !important;
   font-weight: 400;
@@ -56,10 +51,8 @@ a:hover { color: var(--bre-blue-700); text-decoration: underline; }
 :focus-visible { outline: 2px solid rgba(1,189,249,.45); outline-offset: 2px; }
 
 /* =========================================================
-   HEADER — works for custom .bre-topnav and Hostfully header
+   HEADER — supports your custom header and Hostfully default
    ========================================================= */
-
-/* Your custom header (if present) */
 .bre-topnav{
   position: sticky; top: 0; z-index: 2000;
   background: #fff; box-shadow: var(--shadow-xs);
@@ -73,7 +66,7 @@ a:hover { color: var(--bre-blue-700); text-decoration: underline; }
 .bre-nav a{ font-weight:600; padding:8px 10px; border-radius:10px; color:#183049 }
 .bre-nav a:hover{ background:#eef5ff }
 
-/* Hostfully default white-label header (fallback) */
+/* Hostfully default white-label header */
 header[data-testid="white-label-header"]{
   position: sticky; top: 0; z-index: 2000;
   background:#fff !important; box-shadow: var(--shadow-xs);
@@ -88,36 +81,47 @@ header[data-testid="white-label-header"] a{
 header[data-testid="white-label-header"] a:hover{ color:#0e2f66 !important; text-decoration:none !important; }
 
 /* =========================================================
-   HERO — show image reliably (no clipping/collapse)
+   HERO — robust fix for both Hostfully implementations
    ========================================================= */
-
-/* Never collapse the hero; don’t clip it */
 .hf-dbs main.hf-dbs-content{ overflow: visible; }
-.hf-dbs main.hf-dbs-content [data-testid*="hero"],
-.hf-dbs main.hf-dbs-content .hero{
+
+/* CASE A: first content block is a background-image hero */
+.hf-dbs main.hf-dbs-content > *:first-child[style*="background-image"],
+.hf-dbs main.hf-dbs-content > *:first-child div[style*="background-image"]{
+  height: clamp(320px, 42vh, 560px) !important;
+  min-height: 320px !important;
+  background-size: cover !important;
+  background-position: center !important;
+  border-radius: var(--r-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  overflow: hidden !important;
+}
+
+/* CASE B: hero is picture/img nested in wrappers — give wrappers height */
+.hf-dbs main.hf-dbs-content > *:first-child,
+.hf-dbs main.hf-dbs-content > *:first-child > div:first-child{
+  /* only apply if they actually contain media; harmless otherwise */
+  min-height: 320px;
+}
+.hf-dbs main.hf-dbs-content > *:first-child picture,
+.hf-dbs main.hf-dbs-content > *:first-child .hero,
+.hf-dbs main.hf-dbs-content > *:first-child [data-testid*="hero"]{
+  height: clamp(320px, 42vh, 560px) !important;
   border-radius: var(--r-lg);
-  overflow: visible;                 /* allow inner media to define height */
-  box-shadow: none;
-  min-height: 280px;                 /* safety for slower loads */
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.hf-dbs main.hf-dbs-content > *:first-child picture img,
+.hf-dbs main.hf-dbs-content > *:first-child img{
+  width: 100% !important;
+  height: 100% !important;            /* critical: fill parent height */
+  object-fit: cover !important;
+  display: block !important;
 }
 
-/* Hostfully hero renders media inside wrappers — keep them visible */
-.hf-dbs [data-testid*="hero"] *{ max-width:100%; }
-
-/* Critical fix: hero media must fill its container (don’t use our global height:auto) */
-.hf-dbs [data-testid*="hero"] picture,
-.hf-dbs [data-testid*="hero"] picture img,
-.hf-dbs [data-testid*="hero"] img{
-  width:100% !important;
-  height:100% !important;            /* this restores the hero image */
-  object-fit:cover !important;
-  display:block !important;
-}
-
-/* Search panel placement */
+/* Search panel directly under hero */
 .hf-dbs .hf-search, .hf-dbs .search, .hf-dbs .hf-search-form{
-  margin-top: 12px;                 /* never overlap hero text */
-  background:#fff; border-radius:14px; padding:10px; box-shadow: var(--shadow-md);
+  margin-top: 12px; background:#fff; border-radius:14px; padding:10px; box-shadow: var(--shadow-md);
 }
 
 /* =========================================================
@@ -137,10 +141,8 @@ button:hover, .btn:hover, .hf-button:hover, .hf-primary-btn:hover{
 button:active, .btn:active, .hf-button:active, .hf-primary-btn:active{ transform: translateY(1px) !important; }
 
 /* =========================================================
-   PROPERTY CARDS — uniform media + safe badges + hover zoom
+   PROPERTY CARDS — uniform media + hover zoom + safe badges
    ========================================================= */
-
-/* Card shell */
 .hf-card, .property-card, .listing, .card{
   background:#fff !important; border:1px solid #e8effc !important;
   border-radius: var(--r-lg) !important; overflow: hidden !important;
@@ -151,33 +153,31 @@ button:active, .btn:active, .hf-button:active, .hf-primary-btn:active{ transform
   transform: translateY(-4px) !important; box-shadow: var(--shadow-md) !important;
 }
 
-/* Media wrapper — uniform height + clip for hover zoom */
+/* Media wrapper — fixed, uniform height */
 .hf-card picture, .hf-card .media, .hf-card .image,
 .property-card picture, .property-card .media, .property-card .image,
 .listing picture, .listing .media, .listing .image,
 .card picture, .card .media, .card .image{
-  width:100% !important; height:240px !important;        /* uniform row */
+  width:100% !important; height:240px !important;
   overflow:hidden !important; position:relative !important;
   border-top-left-radius: var(--r-lg) !important;
   border-top-right-radius: var(--r-lg) !important;
 }
 
-/* Image — hover zoom */
+/* Image — tasteful hover zoom */
 .hf-card img, .property-card img, .listing img, .card img{
   width:100% !important; height:100% !important; object-fit:cover !important;
   transform: scale(1); transition: transform .35s ease !important;
 }
 .hf-card:hover img, .property-card:hover img, .listing:hover img, .card:hover img{
-  transform: scale(1.06) !important;                      /* subtle zoom */
+  transform: scale(1.06) !important;
 }
 
-/* Body spacing (ensures stats never reach rounded edge) */
+/* Body spacing + titles/location */
 .hf-card .content, .property-card .content, .listing .content, .card .content,
 .hf-card .hf-card-body, .property-card .hf-card-body, .listing .hf-card-body, .card .hf-card-body{
   padding: 12px 14px 16px !important;
 }
-
-/* Titles / location */
 .hf-card h3, .property-card h3, .listing h3, .card h3{
   font-family:'Montserrat', ui-sans-serif !important; font-weight:800 !important;
   font-size:1.05rem !important; letter-spacing:.2px; color:var(--ink) !important;
@@ -194,7 +194,7 @@ button:active, .btn:active, .hf-button:active, .hf-primary-btn:active{ transform
   margin: 0 !important;
 }
 .hf-card .meta > *, .property-card .meta > *, .listing .meta > *, .card .meta > *{
-  margin-bottom:8px !important;            /* spacing between rows */
+  margin-bottom:8px !important;
 }
 
 /* =========================================================
