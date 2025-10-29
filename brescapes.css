@@ -138,5 +138,15 @@ a:hover{ color:#1D46B7 }
 
 /* 5) Prevent image collapse if path is valid but late to load */
 .bre-topnav img, .bre-footer img{ min-height:24px }
+/* Center footer logo */
+.bre-footer .col--logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
 
 
