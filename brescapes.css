@@ -281,5 +281,18 @@ button[data-testid="app-button"]:disabled{
   opacity: .75 !important;
   cursor: not-allowed !important;
 }
+/* Footer — secondary gradient for stronger contrast */
+.bre-footer {
+  background: linear-gradient(135deg, #1D46B7 0%, #000000 100%) !important;
+  color: #e6f0ff !important;
+  padding: 42px 20px 20px !important;
+}
+
+/* Hero text legibility */
+.hero-container h1,
+.hero-container h2 {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
 
 
