@@ -116,3 +116,73 @@ a:hover{ color:var(--bre-blue-600) }
 .hf-dbs .hf-card img, .hf-dbs .property-card img, .hf-dbs .listing img, .hf-dbs .card img {
   width:100%; height:auto; object-fit:cover; aspect-ratio:3/2;
 }
+/* ----- Properties dropdown: unify font + remove double arrow ----- */
+.bre-nav .bre-dropdown { position: relative; }
+
+/* Make <summary> look like your nav links */
+.bre-nav .bre-dropdown > summary {
+  list-style: none;               /* remove default bullet/marker space */
+  cursor: pointer;
+  font: 600 14px/1 Poppins, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+  color: #183049;
+  padding: 8px 10px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover to match your links */
+.bre-nav .bre-dropdown > summary:hover { background: #eef5ff; }
+
+/* Remove the native details/summary marker (all engines) */
+.bre-nav .bre-dropdown > summary::-webkit-details-marker { display: none; }
+.bre-nav .bre-dropdown > summary::marker { content: ""; }
+
+/* Our single caret */
+.bre-nav .bre-dropdown > summary::after {
+  content: "▾";
+  font-weight: 700;
+  color: #016FE7;
+  transition: transform .18s ease;
+}
+
+/* Flip caret when open */
+.bre-nav .bre-dropdown[open] > summary::after { transform: rotate(180deg); }
+
+/* Dropdown panel (moved from inline style) */
+.bre-nav .bre-dropdown .bre-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 240px;
+  background: #fff;
+  border: 1px solid #e9f0fb;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  padding: 8px;
+  z-index: 1000;
+}
+
+/* Menu links */
+.bre-nav .bre-dropdown .bre-menu .bre-link {
+  display: block;
+  padding: 10px 12px;
+  color: #183049;
+  text-decoration: none;
+  border-radius: 8px;
+  font: 500 14px/1.2 Poppins, ui-sans-serif;
+}
+.bre-nav .bre-dropdown .bre-menu .bre-link:hover {
+  background: #f2f7ff;
+  color: #0e2f66;
+}
+
+/* Keyboard focus */
+.bre-nav .bre-dropdown > summary:focus-visible,
+.bre-nav .bre-dropdown .bre-link:focus-visible {
+  outline: 2px solid #01BDF9;
+  outline-offset: 2px;
+}
+
