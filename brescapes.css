@@ -664,6 +664,122 @@ button[data-testid="see-all-properties-button"],
 
 /* safety: undo any accidental global hiding of <img> */
 .hf-dbs img { opacity: 1 !important; visibility: visible !important; }
+/* =========================
+   BRE: Hero + Property Cards
+   ========================= */
+
+/* 1) HERO — image + layout */
+:root{
+  /* change this if you swap hero images later */
+  --bre-hero-url: url("https://orbirental-images.s3.amazonaws.com/5436ae8e-f34c-43ee-b18c-d263c9306945");
+}
+
+/* make sure our rules beat app styles */
+.bre-theme .hero-container{
+  position: relative !important;
+  background-image: var(--bre-hero-url) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+
+  /* height and centering */
+  min-height: 52vh !important;   /* adjust if you want taller/shorter */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 3rem 1rem !important;
+  color: #fff !important;
+  overflow: hidden !important;
+}
+
+/* subtle dark overlay so white headings pop */
+.bre-theme .hero-container::before{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.35));
+  pointer-events:none;
+}
+
+/* keep text visible above overlay */
+.bre-theme .hero-container h1,
+.bre-theme .hero-container h2{
+  position: relative;
+  z-index: 1;
+  margin: 0.15em 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,.35);
+}
+
+/* optional: responsive hero height */
+@media (max-width: 768px){
+  .bre-theme .hero-container{ min-height: 42vh !important; }
+}
+
+/* 2) PROPERTY CARDS — ensure the image area has height and images fill it */
+
+/* banner wrapper on each card (Hostfully classnames vary, so cover both) */
+.bre-theme [data-testid="property-card-banner"],
+.bre-theme .sc-iKOmoZ{
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+
+  /* pick one: fixed height or aspect-ratio (leave both for broad support) */
+  min-height: 220px !important;
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden !important;
+  background: #f6f6f6;
+}
+
+/* carousel containers should stretch to parent height */
+.bre-theme .carousel,
+.bre-theme .carousel-inner{
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+/* each slide should occupy the full area */
+.bre-theme .carousel-item{
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  opacity: 1 !important;          /* neutralize any lazy/animation opacity */
+  transition: none !important;    /* prevents weird cross-fades collapsing height */
+}
+
+/* images must fill, not define, the height */
+.bre-theme .carousel-item img{
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+/* defensive resets: kill any accidental overlays that could hide images */
+.bre-theme [data-testid="property-card-banner"]::before,
+.bre-theme [data-testid="property-card-banner"]::after{
+  content: none !important;
+}
+
+/* 3) GENERAL — do not let global rules zero-out images */
+.bre-theme img{
+  max-width: 100%;
+  height: auto;
+}
+
+/* If another stylesheet sets `height:0` or `visibility:hidden` anywhere, force visible */
+.bre-theme .hero-container,
+.bre-theme [data-testid="property-card-banner"],
+.bre-theme .carousel,
+.bre-theme .carousel-inner,
+.bre-theme .carousel-item{
+  visibility: visible !important;
+}
+
 
 
 
