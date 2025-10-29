@@ -245,3 +245,89 @@ input:focus,select:focus,textarea:focus{
 .hf-dbs .container,.hf-dbs .content,.hf-dbs .main,.hf-dbs .page-content{
   max-width:1200px; margin-inline:auto; padding-inline:20px;
 }
+/***** BRE v1.5 — Fixes: hero subhead cut, intro text clipping, /search visibility *****/
+
+/* 1) Give the hero a touch more room so the subhead clears the search pill */
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child{
+  height: clamp(340px, 42vh, 500px) !important; /* was 320/460 */
+  max-height: 500px !important;
+}
+
+/* 2) Reduce the search bar overlap and guarantee space below it */
+html.bre-theme body.hf-dbs .hf-search,
+html.bre-theme body.hf-dbs .search{
+  margin-top: -4px !important;     /* softer overlap so text under hero stays visible */
+  margin-bottom: 28px !important;  /* ensures "Find an Escape" + intro paragraph aren't cut */
+  z-index: 3 !important;
+}
+@media (max-width: 900px){
+  html.bre-theme body.hf-dbs .hf-search,
+  html.bre-theme body.hf-dbs .search{
+    margin-top: 0 !important;      /* no overlap on mobile */
+    margin-bottom: 24px !important;
+  }
+}
+
+/* 3) Never let the blocks right after the hero clip text */
+.hf-dbs main.hf-dbs-content > *{
+  overflow: visible !important;
+  max-height: none !important;     /* guard vs. theme max-heights */
+  -webkit-mask-image: none !important; mask-image: none !important; /* guard vs. fade masks */
+}
+
+/* Headings & paragraphs directly under hero get breathing room */
+.hf-dbs main.hf-dbs-content h1 + p,
+.hf-dbs main.hf-dbs-content h2 + p{
+  margin-top: 6px !important;
+}
+
+/* 4) Make sure "Featured" sections and property grids actually render */
+.hf-dbs [class*="featured"],
+.hf-dbs [data-testid*="featured"],
+.hf-dbs [class*="properties"],
+.hf-dbs [data-testid*="properties"],
+.hf-dbs [class*="results"],
+.hf-dbs [data-testid*="results"],
+.hf-dbs [class*="listings"],
+.hf-dbs [data-testid*="list"]{
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  height: auto !important;
+  min-height: 240px !important;    /* prevents accidental collapse */
+  overflow: visible !important;
+  margin-top: 22px !important;
+}
+
+/* 5) Property cards & images — standardize (also affects /search) */
+.hf-dbs .hf-card, .hf-dbs .property-card, .hf-dbs .listing, .hf-dbs .card{
+  display: block !important;
+  border: 1px solid #e6eefc; border-radius: 16px;
+  background: #fff; overflow: hidden;
+  box-shadow: 0 6px 24px rgba(11,42,97,.08);
+}
+.hf-dbs .hf-card img, .hf-dbs .property-card img, .hf-dbs .listing img, .hf-dbs .card img{
+  width: 100%; display: block; object-fit: cover; aspect-ratio: 3/2;
+}
+
+/* 6) Extra safety on page wrappers so nothing overlays results/content */
+.hf-dbs main.hf-dbs-content{
+  padding-bottom: 32px !important; /* guarantee space after intro before feature grid */
+}
+.hf-dbs main.hf-dbs-content > *:nth-child(2){
+  margin-top: 16px !important;     /* intro block directly after hero */
+}
+
+/* 7) Lighten hero overlay just a bit more for readability (keeps brand image) */
+html.bre-theme body.hf-dbs main.hf-dbs-content > *:first-child::after{
+  background: linear-gradient(0deg, rgba(0,0,0,.16) 0%, rgba(0,0,0,.08) 100%) !important;
+}
+
+/* 8) Typography tweak: intro paragraph line-height for easy reading */
+.hf-dbs main.hf-dbs-content p{
+  line-height: 1.7 !important;
+}
+
+
