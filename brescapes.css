@@ -247,3 +247,66 @@ button:focus-visible, .btn:focus-visible, .hf-button:focus-visible{ outline:3px 
   .bre-brand img{ height:32px }
   .bre-nav{ gap:10px }
 }
+/***** BRE — fix clipped stats on cards + shrink “See all properties” tile *****/
+
+/* 1) Property-card stats: allow wrapping + add safe bottom space */
+.hf-card .meta,
+.property-card .meta,
+.listing .meta,
+.card .meta,
+.hf-card [class*="amenit"],
+.property-card [class*="amenit"],
+.listing [class*="amenit"],
+.card [class*="amenit"]{
+  display: flex !important;
+  flex-wrap: wrap !important;           /* <- prevents clipping */
+  gap: 8px 10px !important;
+  margin: 0 14px 12px !important;       /* breathing room at the bottom */
+  overflow: visible !important;
+}
+
+/* Ensure the overall card has a touch of inner bottom padding so
+   rounded corners don't trim the last row of pills */
+.hf-card,
+.property-card,
+.listing,
+.card{
+  padding-bottom: 10px !important;
+}
+
+/* 2) “See all properties” tile: reduce footprint, center text */
+.hf-dbs [data-testid*="view-all"],
+.hf-dbs [class*="view-all"],
+.hf-dbs [class*="see-all"],
+.hf-dbs a[aria-label*="See all"],
+.hf-dbs a[href*="search"]:has(span:contains("See all")) {
+  width: 220px !important;
+  height: 260px !important;
+  min-width: 200px !important;
+  min-height: 220px !important;
+  padding: 16px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* Text sizing inside the tile */
+.hf-dbs [data-testid*="view-all"] *,
+.hf-dbs [class*="view-all"] *,
+.hf-dbs [class*="see-all"] *{
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  line-height: 1.2 !important;
+}
+
+/* If the grid is trying to stretch that CTA, forbid it */
+.hf-dbs [data-testid*="view-all"],
+.hf-dbs [class*="view-all"],
+.hf-dbs [class*="see-all"]{
+  flex: 0 0 auto !important;
+}
+
